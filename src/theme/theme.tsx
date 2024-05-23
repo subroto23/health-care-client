@@ -18,13 +18,25 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           padding: "8px 24px",
-          color: "#003846",
+          "&:hover": {
+            backgroundColor: "#003846",
+          },
         },
       },
     },
     MuiContainer: {
       defaultProps: {
         maxWidth: "lg",
+      },
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          textDecoration: "none",
+          "&:hover": {
+            textDecoration: "none",
+          },
+        },
       },
     },
   },

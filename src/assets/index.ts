@@ -1,5 +1,5 @@
-export const assets = {
-  image: {
+const assets = {
+  images: {
     logo: require("./image/Logo.png"),
     footerLogo: require("./image/footer-logo.png"),
     yellow: require("./image/calendar.png"),
@@ -11,5 +11,9 @@ export const assets = {
     redFrame: require("./image/red-frame.png"),
     statistiscope: require("./image/staticscope.png"),
     yellowFrame: require("./image/yrllow-frame.png"),
+    doctor2: require("./image/doctor-2.png"),
+    stataticScope2: require("./image/statiticScope2.png"),
   },
 };
+
+export default assets;
