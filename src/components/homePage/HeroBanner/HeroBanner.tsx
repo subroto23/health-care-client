@@ -61,6 +61,8 @@ const HeroBanner = () => {
           <Stack position={"relative"} pr={4}>
             <Image
               src={assets.images.doctorBanner}
+              width={350}
+              height={350}
               alt="banner"
               className="w-[350px] h-[400px] z-20"
             />
@@ -87,8 +89,8 @@ const HeroBanner = () => {
             />
             <Image
               src={assets.images.yellowFrame}
-              height={80}
               width={80}
+              height={80}
               alt="Yellow Frame"
               className="absolute bottom-12 right-0"
             />

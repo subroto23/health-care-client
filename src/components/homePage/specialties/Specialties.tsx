@@ -14,11 +14,11 @@ const Specialties = async () => {
   );
   const specialtiesData = await res.json();
   return (
-    <>
+    <Box>
       <Container>
-        <Box my={10} sx={{ textAlign: "center" }}>
+        <Box mt={15} sx={{ textAlign: "center" }}>
           <Stack my={8} textAlign={"start"}>
-            <Typography variant="h3" component={"h4"} fontWeight={600}>
+            <Typography variant="h4" component={"h4"} fontWeight={600}>
               Explore Treatments across specialties
             </Typography>
             <Typography component={"p"} fontWeight={300} mt={1} fontSize={24}>
@@ -82,7 +82,7 @@ const Specialties = async () => {
           </Button>
         </Box>
       </Container>
-    </>
+    </Box>
   );
 };
 

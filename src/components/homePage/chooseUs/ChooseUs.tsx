@@ -22,7 +22,7 @@ const ChooseUs = () => {
             Why Choose Us
           </Typography>
         </Stack>
-        <Stack direction={"row"} gap={12} alignItems={"center"}>
+        <Stack direction={"row"} gap={8} alignItems={"center"}>
           <Stack
             direction={"column"}
             gap={4}
@@ -49,8 +49,8 @@ const ChooseUs = () => {
                 >
                   <Image
                     src={assets.svg.awardIcon}
-                    width={30}
-                    height={30}
+                    width={50}
+                    height={50}
                     alt="award"
                   />
                 </Box>
@@ -91,8 +91,8 @@ const ChooseUs = () => {
                 >
                   <Image
                     src={assets.svg.awardIcon}
-                    width={30}
-                    height={30}
+                    width={50}
+                    height={50}
                     alt="award"
                   />
                 </Box>
@@ -133,8 +133,8 @@ const ChooseUs = () => {
                 >
                   <Image
                     src={assets.svg.awardIcon}
-                    width={30}
-                    height={30}
+                    width={50}
+                    height={50}
                     alt="award"
                   />
                 </Box>
@@ -175,8 +175,8 @@ const ChooseUs = () => {
                 >
                   <Image
                     src={assets.svg.awardIcon}
-                    width={30}
-                    height={30}
+                    width={50}
+                    height={50}
                     alt="award"
                   />
                 </Box>
