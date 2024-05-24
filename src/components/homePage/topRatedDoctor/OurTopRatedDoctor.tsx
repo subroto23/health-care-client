@@ -21,30 +21,30 @@ const OurTopRatedDoctor = async () => {
   return (
     <Box
       sx={{
-        my: 10,
-        py: 30,
+        my: 6,
+        py: 25,
         backgroundColor: "rgba(20,20,20,0.1)",
         clipPath: "polygon(0 0,100% 25%,100% 100%,0% 75%)",
       }}
     >
       <Stack my={8} textAlign={"center"}>
-        <Typography variant="h3" component={"h4"} fontWeight={600}>
+        <Typography variant="h4" component={"h4"} fontWeight={600}>
           Our Top Rated Doctors
         </Typography>
         <Typography
           component={"p"}
           fontWeight={300}
           mt={1}
-          fontSize={24}
-          width={700}
+          fontSize={20}
+          width={500}
           mx={"auto"}
         >
-          Access to expert physician and surgeons,advanced technologies and top
-          quality surgery facilities right here.
+          Book appointments and received experienced doctor insight from various
+          medical fields.
         </Typography>
       </Stack>
       <Container>
-        <Grid container spacing={4} pb={8}>
+        <Grid container spacing={4}>
           {data?.map((el: any) => {
             return (
               <Grid key={el.id} item md={4}>
@@ -133,6 +133,18 @@ const OurTopRatedDoctor = async () => {
             );
           })}
         </Grid>
+        <Box textAlign={"center"} pb={1}>
+          <Button variant="outlined" sx={{ marginTop: "40px" }}>
+            <Typography
+              variant="h6"
+              component={"p"}
+              textTransform={"capitalize"}
+              fontWeight={400}
+            >
+              View all
+            </Typography>
+          </Button>
+        </Box>
       </Container>
     </Box>
   );

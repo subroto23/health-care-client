@@ -19,6 +19,7 @@ const assets = {
     stetoscope2: require("./image/Stetoscope.png"),
     familyOnBeach: require("./image/familyOnBeach.png"),
     howItWork: require("./image/how-it-works-img.png"),
+    choiceUs: require("./image/choose-us.png"),
   },
   svg: {
     arrow: require("./svgs/arrow.svg"),

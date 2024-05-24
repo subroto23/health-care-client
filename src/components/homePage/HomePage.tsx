@@ -1,4 +1,5 @@
 import HeroBanner from "./HeroBanner/HeroBanner";
+import ChooseUs from "./chooseUs/ChooseUs";
 import Specialties from "./specialties/Specialties";
 import OurTopRatedDoctor from "./topRatedDoctor/OurTopRatedDoctor";
 
@@ -8,6 +9,7 @@ const HomePage = () => {
       <HeroBanner />
       <Specialties />
       <OurTopRatedDoctor />
+      <ChooseUs />
     </div>
   );
 };
