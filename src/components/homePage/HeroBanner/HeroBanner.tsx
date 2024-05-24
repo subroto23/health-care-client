@@ -68,28 +68,28 @@ const HeroBanner = () => {
               src={assets.images.dotGroup}
               height={150}
               width={150}
-              alt="banner"
+              alt="Dot Group"
               className="absolute top-5 right-2"
             />
             <Image
               src={assets.images.greenFrame}
               height={80}
               width={80}
-              alt="banner"
+              alt="Green Framer"
               className="absolute -bottom-4 -left-16 z-30"
             />
             <Image
               src={assets.images.redFrame}
               height={80}
               width={80}
-              alt="banner"
+              alt="Red Frmaer"
               className="absolute top-16 -left-4"
             />
             <Image
               src={assets.images.yellowFrame}
               height={80}
               width={80}
-              alt="banner"
+              alt="Yellow Frame"
               className="absolute bottom-12 right-0"
             />
             <Box

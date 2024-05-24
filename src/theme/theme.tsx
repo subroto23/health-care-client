@@ -21,6 +21,12 @@ export const theme = createTheme({
           "&:hover": {
             backgroundColor: "#003846",
           },
+          "&.MuiButton-outlined": {
+            "&:hover": {
+              color: "#ffff",
+              backgroundColor: "#04A7C3",
+            },
+          },
         },
       },
     },
