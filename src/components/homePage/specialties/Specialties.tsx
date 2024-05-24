@@ -17,7 +17,7 @@ const Specialties = async () => {
     <>
       <Container>
         <Box my={10} sx={{ textAlign: "center" }}>
-          <Stack my={8}>
+          <Stack my={8} textAlign={"start"}>
             <Typography variant="h3" component={"h4"} fontWeight={600}>
               Explore Treatments across specialties
             </Typography>
