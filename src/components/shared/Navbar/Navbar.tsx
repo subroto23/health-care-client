@@ -1,7 +1,13 @@
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+"use client";
+import { Box, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import assets from "@/assets";
 import Link from "next/link";
+
+import dynamic from "next/dynamic";
+const AuthButton = dynamic(() => import("@/components/ui/AuthButton"), {
+  ssr: false,
+});
 
 const Navbar = () => {
   return (
@@ -62,29 +68,8 @@ const Navbar = () => {
               Medicine
             </Typography>
           </Stack>
-
-          {/* Button and UserMenu */}
           <Stack direction={"row"} gap={2}>
-            <Button component={Link} href={"/login"}>
-              <Typography
-                variant="h6"
-                component={"p"}
-                color="#ffff"
-                textTransform={"capitalize"}
-              >
-                Login
-              </Typography>
-            </Button>
-            <Button component={Link} href="/signup">
-              <Typography
-                variant="h6"
-                component={"p"}
-                color="#ffff"
-                textTransform={"capitalize"}
-              >
-                Signup
-              </Typography>
-            </Button>
+            <AuthButton />
           </Stack>
         </Stack>
       </Container>

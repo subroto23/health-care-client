@@ -35,6 +35,8 @@ import { jsonDataToFormDataConverer } from "@/lib/formData/converFormData";
 import { patientRegister } from "@/services/actions/patientRegistater";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { loginUser } from "@/services/actions/loginUser";
+import { storedUserInfo } from "@/services/authService/auth.service";
 
 const Registation = () => {
   const router = useRouter();
@@ -49,7 +51,16 @@ const Registation = () => {
       const res = await patientRegister(data);
       if (res?.data?.id) {
         toast.success(res.message);
-        router.push("/login");
+        //Autometic Login user When Suuccessfully registaion
+        const result = await loginUser({
+          email: values.patient.email,
+          password: values.password,
+        });
+        const accessToken = result?.data?.accessToken;
+        if (result?.success === true && accessToken) {
+          storedUserInfo(accessToken);
+          router.push("/");
+        }
       } else if (res?.success === false) {
         toast.error(res?.message);
       }

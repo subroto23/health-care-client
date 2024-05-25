@@ -18,6 +18,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/services/actions/loginUser";
+import { storedUserInfo } from "@/services/authService/auth.service";
 
 type Inputs = {
   password: string;
@@ -34,7 +35,9 @@ const LoginPage = () => {
   const onSubmit: SubmitHandler<Inputs> = async (values) => {
     try {
       const res = await loginUser(values);
-      if (res?.success === true) {
+      const accessToken = res?.data?.accessToken;
+      if (res?.success === true && accessToken) {
+        storedUserInfo(accessToken);
         toast.success(res.message);
         router.push("/");
       } else if (res?.success === false) {
