@@ -26,7 +26,7 @@ const Specialties = async () => {
             </Typography>
           </Stack>
           <Stack direction={"row"} gap={2}>
-            {specialtiesData?.data?.map((el: ISpecialties) => {
+            {specialtiesData?.data?.slice(0, 6).map((el: ISpecialties) => {
               return (
                 <Box
                   key={el.id}

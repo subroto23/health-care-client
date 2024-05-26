@@ -39,7 +39,6 @@ const HCInputForm = ({
           helperText={error?.message}
         />
       )}
-      defaultValue={10}
     />
   );
 };
