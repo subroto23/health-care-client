@@ -27,17 +27,20 @@ const Footer = () => {
             Health Care
           </Typography>
         </Stack>
-        <Stack>
-          <Typography
-            component={"p"}
-            fontWeight={400}
-            color={"#ffff"}
-            mt={2}
-            fontSize={20}
-          >
-            &copy; {year}, Healthcare. All rights reserved.
-          </Typography>
-        </Stack>
+        <Typography
+          component={"p"}
+          fontWeight={400}
+          color={"#ffff"}
+          mt={2}
+          fontSize={20}
+          sx={{
+            width: { xs: "60%", md: "100%" },
+            marginX: { xs: "auto" },
+            textAlign: "center",
+          }}
+        >
+          &copy; {year}, Healthcare. All rights reserved.
+        </Typography>
       </Stack>
     </>
   );

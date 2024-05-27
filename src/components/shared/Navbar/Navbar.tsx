@@ -3,24 +3,32 @@ import { Box, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import assets from "@/assets";
 import Link from "next/link";
-
 import dynamic from "next/dynamic";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 const AuthButton = dynamic(() => import("@/components/ui/AuthButton"), {
   ssr: false,
 });
 
 const Navbar = () => {
   return (
-    <Box sx={{ backgroundColor: "#F2FBFC" }}>
+    <Box
+      sx={{
+        backgroundColor: "#F2FBFC",
+        padding: { xs: 2, sm: 3 },
+        borderBottom: { xs: "1px solid gray", md: "none" },
+      }}
+    >
       <Container>
         <Stack
           direction={"row"}
           justifyContent={"space-between"}
           alignItems={"center"}
-          py={2}
+          py={{ xs: 1, sm: 2 }}
+          gap={{ xs: 1, sm: 3 }}
         >
           {/* Logo Section */}
-          <Stack direction={"row"} gap={2}>
+          <Stack direction={"row"} gap={{ xs: 1, sm: 2 }} alignItems={"center"}>
             <Link href="/">
               <Image
                 src={assets.images.logo}
@@ -41,34 +49,42 @@ const Navbar = () => {
           </Stack>
 
           {/* NavLink Section */}
-          <Stack direction={"row"} gap={5}>
-            <Typography
-              variant="h6"
-              component={Link}
-              href="/"
-              color={"primary"}
-              fontWeight={600}
+          <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+            <Stack
+              direction={"row"}
+              gap={{ xs: 2, sm: 5 }}
+              alignItems={"center"}
             >
-              Home
-            </Typography>
-            <Typography
-              variant="h6"
-              component={Link}
-              href="/doctors"
-              fontWeight={600}
-            >
-              Doctors
-            </Typography>
-            <Typography
-              variant="h6"
-              component={Link}
-              href="/medicine"
-              fontWeight={600}
-            >
-              Medicine
-            </Typography>
-          </Stack>
-          <Stack direction={"row"} gap={2}>
+              <Typography
+                variant="h6"
+                component={Link}
+                href="/"
+                color={"primary"}
+                fontWeight={600}
+              >
+                Home
+              </Typography>
+              <Typography
+                variant="h6"
+                component={Link}
+                href="/doctors"
+                fontWeight={600}
+              >
+                Doctors
+              </Typography>
+              <Typography
+                variant="h6"
+                component={Link}
+                href="/medicine"
+                fontWeight={600}
+              >
+                Medicine
+              </Typography>
+            </Stack>
+          </Box>
+
+          {/* Auth Button Section */}
+          <Stack direction={"row"} gap={{ xs: 1, sm: 2 }}>
             <AuthButton />
           </Stack>
         </Stack>

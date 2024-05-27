@@ -1,4 +1,5 @@
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import { servicesData } from "./ServicesCounterData";
 
 const ServicesCounter = () => {
   return (
@@ -8,86 +9,44 @@ const ServicesCounter = () => {
           justifyContent={"center"}
           alignItems={"center"}
           py={6}
-          className=" bg-gradient-to-r to-[#04A7C3] to-[90%]  from-[#04A7C3] rounded-3xl"
+          sx={{
+            background: "linear-gradient(to right, #04A7C3 20%, #036270 80%)",
+            borderRadius: "24px",
+          }}
         >
           <Stack>
-            <Grid container direction="row" justifyContent="space-around">
-              <Grid item md={2} textAlign={"center"}>
-                <Typography
-                  variant="h3"
-                  component={"h3"}
-                  fontWeight={600}
-                  color={"#ffff"}
+            <Grid container spacing={4} justifyContent="center">
+              {servicesData.map((item, index) => (
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  md={3}
+                  textAlign={"center"}
+                  key={index}
                 >
-                  180 +
-                </Typography>
-                <Typography
-                  component={"p"}
-                  fontWeight={300}
-                  mt={1}
-                  fontSize={24}
-                  color={"#ffff"}
-                >
-                  Expert Doctors
-                </Typography>
-              </Grid>
-              <Grid item md={2} textAlign={"center"}>
-                <Typography
-                  variant="h3"
-                  component={"h3"}
-                  fontWeight={600}
-                  color={"#ffff"}
-                >
-                  26 +
-                </Typography>
-                <Typography
-                  component={"p"}
-                  fontWeight={300}
-                  mt={1}
-                  fontSize={24}
-                  color={"#ffff"}
-                >
-                  Expert Services
-                </Typography>
-              </Grid>
-              <Grid item md={2} textAlign={"center"}>
-                <Typography
-                  variant="h3"
-                  component={"h3"}
-                  fontWeight={600}
-                  color={"#ffff"}
-                >
-                  10K +
-                </Typography>
-                <Typography
-                  component={"p"}
-                  fontWeight={300}
-                  mt={1}
-                  fontSize={24}
-                  color={"#ffff"}
-                >
-                  Happy Patients
-                </Typography>
-              </Grid>
-              <Grid item md={2} textAlign={"center"}>
-                <Typography
-                  variant="h3"
-                  component={"h3"}
-                  fontWeight={600}
-                  color={"#ffff"}
-                >
-                  10 +
-                </Typography>
-                <Typography
-                  component={"p"}
-                  fontWeight={300}
-                  mt={1}
-                  fontSize={24}
-                  color={"#ffff"}
-                >
-                  Best Award
-                </Typography>
-              </Grid>
+                  <Typography
+                    variant="h3"
+                    component={"h3"}
+                    fontWeight={600}
+                    color={"#ffff"}
+                    sx={{ fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" } }}
+                  >
+                    {item.count}
+                  </Typography>
+                  <Typography
+                    component={"p"}
+                    fontWeight={300}
+                    mt={1}
+                    color={"#ffff"}
+                    sx={{
+                      fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+                    }}
+                  >
+                    {item.label}
+                  </Typography>
+                </Grid>
+              ))}
             </Grid>
           </Stack>
         </Box>

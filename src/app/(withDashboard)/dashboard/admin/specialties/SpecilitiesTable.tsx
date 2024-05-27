@@ -17,11 +17,11 @@ export default function SpecilityTable() {
     return <h1>Loading...</h1>;
   }
   const columns: GridColDef[] = [
-    { field: "title", headerName: "Title", width: 300 },
+    { field: "title", headerName: "Title", flex: 1 },
     {
       field: "Action",
       headerName: "Action",
-      width: 300,
+      flex: 1,
       renderCell: ({ row }) => {
         return (
           <Box>
@@ -33,7 +33,9 @@ export default function SpecilityTable() {
     {
       field: "icon",
       headerName: "Icon",
-      width: 300,
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
       renderCell: ({ row }) => {
         return (
           <Box>

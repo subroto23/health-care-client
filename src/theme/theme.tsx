@@ -18,16 +18,26 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           padding: "8px 24px",
-          color: "#ffff",
           textTransform: "capitalize",
-          backgroundColor: "#04A7C3",
+          "&.MuiButto-container": {
+            backgroundColor: "#04A7C3",
+          },
           "&:hover": {
             backgroundColor: "#003846",
+            color: "#ffff",
           },
-          "&.MuiButton-outlined": {
-            "&:hover": {
-              color: "#ffff",
-              backgroundColor: "#04A7C3",
+          // "&.MuiButton-outlined": {
+          //   color: "#04A7C3",
+          //   "&:hover": {
+          //     color: "#ffff",
+          //   },
+          // },
+          outlined: {
+            "&.MuiButton-outlined": {
+              color: "#04A7C3", // Default text color
+              "&:hover": {
+                color: "#ffff", // Text color on hover
+              },
             },
           },
         },

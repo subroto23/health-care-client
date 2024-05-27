@@ -4,11 +4,10 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardMedia,
-  Container,
   Grid,
   Stack,
   Typography,
+  Container,
 } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Image from "next/image";
@@ -21,10 +20,12 @@ const OurTopRatedDoctor = async () => {
   return (
     <Box
       sx={{
-        py: 25,
-        // backgroundColor: "rgba(20,20,20,0.1)",
+        py: { xs: 10, md: 25 },
         backgroundColor: "#F2FBFC",
-        clipPath: "polygon(0 0,100% 25%,100% 100%,0% 75%)",
+        clipPath: {
+          xs: "none",
+          md: "polygon(0 0, 100% 25%, 100% 100%, 0% 75%)",
+        },
       }}
     >
       <Stack my={8} textAlign={"center"}>
@@ -35,11 +36,11 @@ const OurTopRatedDoctor = async () => {
           component={"p"}
           fontWeight={300}
           mt={1}
-          fontSize={20}
-          width={500}
+          fontSize={{ xs: 16, sm: 18, md: 20 }}
+          width={{ xs: "100%", md: 500 }}
           mx={"auto"}
         >
-          Book appointments and received experienced doctor insight from various
+          Book appointments and receive experienced doctor insight from various
           medical fields.
         </Typography>
       </Stack>
@@ -47,7 +48,7 @@ const OurTopRatedDoctor = async () => {
         <Grid container spacing={4}>
           {data?.map((el: any) => {
             return (
-              <Grid key={el.id} item md={4}>
+              <Grid key={el.id} item xs={12} sm={6} md={4}>
                 <Card
                   sx={{
                     paddingBottom: "20px",
@@ -57,6 +58,9 @@ const OurTopRatedDoctor = async () => {
                       border: "1px solid blue",
                       borderRadius: "10px",
                     },
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
                   }}
                 >
                   <Box>
@@ -65,21 +69,23 @@ const OurTopRatedDoctor = async () => {
                       width={500}
                       height={100}
                       alt={el?.name}
+                      layout="responsive"
                     />
                   </Box>
-                  <CardContent>
+                  <CardContent sx={{ flexGrow: 1 }}>
                     <Typography
                       gutterBottom
                       variant="h5"
                       component="div"
                       fontWeight={600}
+                      fontSize={{ xs: 20, sm: 22, md: 24 }}
                     >
                       {el?.name}
                     </Typography>
                     <Typography
                       variant="body2"
-                      fontSize={"20px"}
-                      fontWeight={"600px"}
+                      fontSize={{ xs: 14, sm: 16, md: 18 }}
+                      fontWeight={600}
                       color={"primary.main"}
                     >
                       {el?.qualification}, {el?.designation}
@@ -88,20 +94,19 @@ const OurTopRatedDoctor = async () => {
                       direction={"row"}
                       justifyContent={"space-between"}
                       alignItems={"center"}
+                      mt={2}
                     >
                       <Typography
                         variant="body2"
                         color="text.secondary"
-                        mt={1}
-                        fontSize={"20px"}
-                        fontWeight={"600px"}
+                        fontSize={{ xs: 12, sm: 14, md: 16 }}
+                        fontWeight={600}
                       >
                         <LocationOnIcon /> {el?.address}
                       </Typography>
                       <Typography
                         variant="body2"
-                        mt={1}
-                        fontSize={"22px"}
+                        fontSize={{ xs: 14, sm: 16, md: 18 }}
                         fontWeight={600}
                         color={"primary.main"}
                         mr={2}
@@ -120,12 +125,20 @@ const OurTopRatedDoctor = async () => {
                         textTransform={"capitalize"}
                         fontWeight={600}
                         color={"#ffff"}
+                        fontSize={{ xs: 12, sm: 14, md: 16 }}
                       >
                         Book Now
                       </Typography>
                     </Button>
                     <Button variant="outlined" size="small">
-                      View Profile
+                      <Typography
+                        textTransform={"capitalize"}
+                        fontWeight={600}
+                        fontSize={{ xs: 12, sm: 14, md: 16 }}
+                        color="#04A7C3"
+                      >
+                        View Profile
+                      </Typography>
                     </Button>
                   </CardActions>
                 </Card>

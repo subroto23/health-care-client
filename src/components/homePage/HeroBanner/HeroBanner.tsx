@@ -7,24 +7,36 @@ const HeroBanner = () => {
   return (
     <Box sx={{ backgroundColor: "#F2FBFC" }} pb={5}>
       <Container sx={{ backgroundColor: "#F2FBFC" }}>
-        <Stack py={2} direction={"row"} justifyContent={"space-between"}>
+        <Stack
+          py={2}
+          direction={{ xs: "column", md: "row" }}
+          justifyContent="space-between"
+          alignItems={{ xs: "center", md: "flex-start" }}
+          spacing={2}
+          gap={4}
+        >
           {/* Left Side */}
-          <Box pt={3}>
-            <Stack direction={"column"} gap={2}>
+          <Box pt={{ xs: 1, md: 3 }} textAlign={{ xs: "left", md: "left" }}>
+            <Stack direction="column" gap={2}>
               <Typography
-                variant="h3"
-                component={"h4"}
+                variant={"h2"}
+                component={"h1"}
                 fontWeight={800}
-                color={"primary"}
+                color="primary"
+                sx={{
+                  fontSize: { xs: "24px", md: "56px" },
+                  textAlign: { xs: "center", sm: "left", md: "left" },
+                  width: { xs: "100%", md: "680px" },
+                }}
               >
-                Protect Your Life <br /> And Take Care Of <br /> Your Health
+                Protect Your Life And Take Care Of Your Health
               </Typography>
               <Typography
-                variant={"h6"}
-                component={"p"}
+                variant="h6"
+                component="p"
                 maxWidth={550}
-                textAlign={"justify"}
-                color={"#7A7289"}
+                textAlign="justify"
+                color="#7A7289"
               >
                 Your health is your most valuable asset, and we are here to help
                 you protect it. Our website is dedicated to providing you with
@@ -32,23 +44,31 @@ const HeroBanner = () => {
                 improve your health and well-being.
               </Typography>
             </Stack>
-            <Stack direction={"row"} gap={2} mt={3}>
-              <Button component={Link} href={"/make-appointment"}>
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              gap={2}
+              mt={3}
+              alignItems={{ xs: "center", md: "flex-start" }}
+            >
+              <Button component={Link} href="/make-appointment">
                 <Typography
                   variant="h6"
-                  component={"p"}
+                  component="p"
                   color="#ffff"
-                  textTransform={"capitalize"}
+                  textTransform="capitalize"
                   fontWeight={400}
                 >
                   Make Appointments
                 </Typography>
               </Button>
-              <Button variant="outlined">
+              <Button
+                variant="outlined"
+                sx={{ display: { xs: "none", md: "block" } }}
+              >
                 <Typography
                   variant="h6"
-                  component={"p"}
-                  textTransform={"capitalize"}
+                  component="p"
+                  textTransform="capitalize"
                   fontWeight={400}
                 >
                   Contact Us
@@ -68,31 +88,31 @@ const HeroBanner = () => {
             />
             <Image
               src={assets.images.dotGroup}
-              height={150}
-              width={150}
+              height={100}
+              width={100}
               alt="Dot Group"
-              className="absolute top-5 right-2"
+              className="absolute top-5 md:right-16 right-2"
             />
             <Image
               src={assets.images.greenFrame}
-              height={80}
-              width={80}
+              height={50}
+              width={50}
               alt="Green Framer"
-              className="absolute -bottom-4 -left-16 z-30"
+              className="absolute md:bottom-16 bottom-16 md:-left-12 md:z-30"
             />
             <Image
               src={assets.images.redFrame}
-              height={80}
-              width={80}
+              height={50}
+              width={50}
               alt="Red Frmaer"
-              className="absolute top-16 -left-4"
+              className="absolute md:top-16 top-20 md:-left-4"
             />
             <Image
               src={assets.images.yellowFrame}
-              width={80}
-              height={80}
+              width={50}
+              height={50}
               alt="Yellow Frame"
-              className="absolute bottom-12 right-0"
+              className="absolute md:bottom-12 bottom-28 md:right-0 right-4"
             />
             <Box
               p={2}
@@ -101,7 +121,7 @@ const HeroBanner = () => {
               <Typography
                 variant="h6"
                 component={"h4"}
-                fontWeight={200}
+                fontWeight={600}
                 color={"primary"}
               >
                 Health Care

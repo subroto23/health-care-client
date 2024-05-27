@@ -1,4 +1,4 @@
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -16,61 +16,88 @@ const Specialties = async () => {
   return (
     <Box>
       <Container>
-        <Box mt={15} sx={{ textAlign: "center" }}>
-          <Stack my={8} textAlign={"start"}>
-            <Typography variant="h4" component={"h4"} fontWeight={600}>
+        <Box mt={{ xs: 10, md: 12 }} sx={{ textAlign: "center" }}>
+          <Stack
+            my={{ xs: 5, md: 8 }}
+            textAlign={{ xs: "start", sm: "center", md: "start" }}
+          >
+            <Typography
+              variant={"h2"}
+              component={"h1"}
+              fontWeight={600}
+              sx={{
+                fontSize: { xs: "24px", md: "56px" },
+                textAlign: { xs: "center", sm: "start" },
+              }}
+            >
               Explore Treatments across specialties
             </Typography>
-            <Typography component={"p"} fontWeight={300} mt={1} fontSize={24}>
-              Find exprerinenced doctors across all specialties
+            <Typography
+              component={"p"}
+              fontWeight={400}
+              mt={1}
+              fontSize={{ xs: 20, md: 24 }}
+              sx={{ textAlign: { xs: "center", sm: "start" } }}
+            >
+              Find experienced doctors across all specialties
             </Typography>
           </Stack>
-          <Stack direction={"row"} gap={2}>
+          <Grid
+            container
+            spacing={2}
+            justifyContent={{
+              xs: "center",
+              sm: "flex-start",
+              md: "space-between",
+            }}
+          >
             {specialtiesData?.data?.slice(0, 6).map((el: ISpecialties) => {
               return (
-                <Box
-                  key={el.id}
-                  sx={{
-                    flex: 1,
-                    width: "150px",
-                    backgroundColor: "rgba(245,245,245,1)",
-                    border: "1px solid rgba(250,250,250,1)",
-                    borderRadius: "10px",
-                    padding: "40px 10px",
-                    textAlign: "center",
-                    "& img": {
-                      width: "50px",
-                      height: "50px",
-                      margin: "0 auto",
-                    },
-                    "&:hover": {
-                      border: "1px solid blue",
+                <Grid item xs={12} sm={6} md={4} lg={2} key={el.id}>
+                  <Box
+                    sx={{
+                      backgroundColor: "rgba(245,245,245,1)",
+                      border: "1px solid rgba(250,250,250,1)",
                       borderRadius: "10px",
-                      padding: "40px 10px",
+                      padding: {
+                        xs: "32px",
+                        sm: "44px",
+                        md: "20px 10px",
+                      },
                       textAlign: "center",
-                    },
-                  }}
-                >
-                  <Image
-                    src={el?.icon}
-                    width={50}
-                    height={50}
-                    alt={el?.title}
-                  />
-                  <Typography
-                    component={"p"}
-                    fontWeight={600}
-                    mt={1}
-                    fontSize={"20px"}
-                    marginTop={2}
+                      "& img": {
+                        width: "50px",
+                        height: "50px",
+                        margin: "0 auto",
+                      },
+                      "&:hover": {
+                        border: "1px solid blue",
+                      },
+                    }}
                   >
-                    {el?.title}
-                  </Typography>
-                </Box>
+                    <Image
+                      src={el?.icon}
+                      width={50}
+                      height={50}
+                      alt={el?.title}
+                    />
+                    <Typography
+                      component={"p"}
+                      fontWeight={600}
+                      mt={1}
+                      fontSize={"20px"}
+                    >
+                      {el?.title}
+                    </Typography>
+                  </Box>
+                </Grid>
               );
             })}
-          </Stack>
-          <Button variant="outlined" sx={{ marginTop: "40px" }}>
+          </Grid>
+          <Button
+            variant="outlined"
+            sx={{ marginTop: { xs: "20px", md: "40px" } }}
+          >
             <Typography
               variant="h6"
               component={"p"}
