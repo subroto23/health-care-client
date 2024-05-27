@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
+import { stepsData } from "./StepesData";
 
 const StepsOfSolution = () => {
   return (
@@ -57,7 +58,11 @@ const StepsOfSolution = () => {
           justifyContent={"space-between"}
           gap={3}
         >
-          <Box width={{ xs: "100%", md: "50%" }} height={"100%"}>
+          <Box
+            width={{ xs: "100%", md: "50%" }}
+            height={"100%"}
+            sx={{ order: { xs: 2, md: 1 } }}
+          >
             <Image
               src={assets.images.howItWork}
               alt="How it Works"
@@ -67,31 +72,13 @@ const StepsOfSolution = () => {
             />
           </Box>
           {/* Right side */}
-          <Box width={{ xs: "100%", md: "50%" }}>
+          <Box
+            width={{ xs: "100%", md: "50%" }}
+            sx={{ order: { xs: 1, md: 2 } }}
+          >
             {/* Card Start */}
             <Grid container spacing={3}>
-              {[
-                {
-                  icon: assets.svg.doctorSearch,
-                  title: "Search Doctor",
-                  description: "Top quality surgery facilities right here.",
-                },
-                {
-                  icon: assets.svg.profile,
-                  title: "Check Doctor Profile",
-                  description: "Top quality surgery facilities right here.",
-                },
-                {
-                  icon: assets.svg.schedule,
-                  title: "Schedule Appointment",
-                  description: "Top quality surgery facilities right here.",
-                },
-                {
-                  icon: assets.svg.solution,
-                  title: "Get Your Solution",
-                  description: "Top quality surgery facilities right here.",
-                },
-              ].map((item, index) => (
+              {stepsData?.map((item, index) => (
                 <Grid item xs={12} sm={6} key={index}>
                   <Card
                     sx={{

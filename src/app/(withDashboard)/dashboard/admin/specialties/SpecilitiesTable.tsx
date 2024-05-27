@@ -43,6 +43,7 @@ export default function SpecilityTable() {
               variant="outlined"
               startIcon={<DeleteIcon />}
               onClick={() => handleDelete(row?.id)}
+              sx={{ color: "red" }}
             >
               Delete
             </Button>

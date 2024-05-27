@@ -38,8 +38,10 @@ const Specialties = () => {
           variant="h4"
           component={"h1"}
           textAlign="center"
-          fontWeight={600}
-          my={2}
+          fontWeight={900}
+          my={8}
+          textTransform={"uppercase"}
+          color="primary.main"
         >
           All Specilities
         </Typography>

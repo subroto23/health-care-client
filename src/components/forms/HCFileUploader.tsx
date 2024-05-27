@@ -31,7 +31,7 @@ export default function HCFileUpload({
             variant="contained"
             tabIndex={-1}
             startIcon={<CloudUploadIcon />}
-            sx={{ background: "#006370", ...sx }}
+            sx={{ background: "#006370", color: "#ffff", ...sx }}
             fullWidth={fullWidth}
           >
             {label || "Upload file"}

@@ -1,9 +1,24 @@
+"use client";
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
-import { servicesData } from "./ServicesCounterData";
+import { useEffect, useRef, useState } from "react";
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
+import { servicesData } from "./servicesData";
 
 const ServicesCounter = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const { ref, inView } = useInView();
+  const prevInView = useRef(false);
+
+  useEffect(() => {
+    if (inView && !prevInView.current) {
+      setIsVisible(true);
+    }
+    prevInView.current = inView;
+  }, [inView]);
+
   return (
-    <Box my={10}>
+    <Box my={10} ref={ref}>
       <Container>
         <Box
           justifyContent={"center"}
@@ -16,7 +31,7 @@ const ServicesCounter = () => {
         >
           <Stack>
             <Grid container spacing={4} justifyContent="center">
-              {servicesData.map((item, index) => (
+              {servicesData?.map((item, index) => (
                 <Grid
                   item
                   xs={12}
@@ -32,7 +47,12 @@ const ServicesCounter = () => {
                     color={"#ffff"}
                     sx={{ fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" } }}
                   >
-                    {item.count}
+                    <CountUp
+                      end={isVisible ? item?.count : 0}
+                      duration={2}
+                      separator=","
+                    />
+                    {item?.thousend ? item?.thousend : null}+
                   </Typography>
                   <Typography
                     component={"p"}
