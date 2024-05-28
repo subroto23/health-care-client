@@ -9,12 +9,13 @@ import Image from "next/image";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
 import { toast } from "sonner";
+import Loader from "@/components/ui/Loader";
 
 export default function SpecilityTable() {
   const { data, isLoading } = useGetAllSpecilityQuery({});
   const [deleteSpecility] = useDeleteSpecilityMutation();
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loader />;
   }
   const columns: GridColDef[] = [
     { field: "title", headerName: "Title", flex: 1 },

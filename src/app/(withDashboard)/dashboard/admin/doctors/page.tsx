@@ -5,6 +5,7 @@ import DiolagBoxForDoctor from "./DiolagBoxForDoctor";
 import DoctorsTable from "./doctorsTable";
 import { useGetAllDoctorsQuery } from "@/redux/api/doctorsApi";
 import { useDebounce } from "@/redux/hooks";
+import Loader from "@/components/ui/Loader";
 const Doctors = () => {
   const [open, setOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -15,7 +16,7 @@ const Doctors = () => {
   }
   const { data, isLoading } = useGetAllDoctorsQuery({ ...query });
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loader />;
   }
   const doctors: any = data?.doctors;
   const meta = data?.meta;
