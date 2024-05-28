@@ -10,11 +10,13 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import SideBar from "./Sidebar/SideBar";
 import { getUserInfo } from "@/services/authService/auth.service";
+import NavbarProfile from "../shared/NavbarProfile";
+import { useGetSingleUserQuery } from "@/redux/api/userApi";
 
 const drawerWidth = 240;
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const [userEmail, setUserEmail] = React.useState("");
-
+  const { data, isLoading } = useGetSingleUserQuery({});
   React.useEffect(() => {
     const { email } = getUserInfo();
     setUserEmail(email);
@@ -37,7 +39,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       setMobileOpen(!mobileOpen);
     }
   };
-
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -51,7 +52,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           borderBottom: "1px solid rgba(20,20,20,0.1)",
         }}
       >
-        <Toolbar>
+        <Toolbar sx={{ justifyContent: "space-between" }}>
           <IconButton
             aria-label="open drawer"
             edge="start"
@@ -60,14 +61,31 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Box py={1}>
-            <Typography variant="h5" noWrap component="h2" fontWeight={600}>
-              {userEmail}
-            </Typography>
-            <Typography variant="body2" noWrap component="h1" fontWeight={400}>
-              Welcome, Health Care Dashboard
-            </Typography>
-          </Box>
+          {!isLoading ? (
+            <Box py={1}>
+              <Typography
+                variant="h5"
+                noWrap
+                component="h2"
+                fontWeight={600}
+                sx={{ fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" } }}
+              >
+                Hi, {data?.name}
+              </Typography>
+              <Typography
+                variant="body2"
+                noWrap
+                component="h1"
+                fontWeight={400}
+                sx={{ display: { xs: "none", sm: "block" } }}
+              >
+                Welcome, Health Care Dashboard
+              </Typography>
+            </Box>
+          ) : (
+            <></>
+          )}
+          <NavbarProfile />
         </Toolbar>
       </AppBar>
       <Box

@@ -5,6 +5,7 @@ export enum TagTypes {
   ADMIN = "admin",
   SUPER_ADMIN = "super-admin",
   SCHEDULE = "schedule",
+  USER = "user",
 }
 
 export const tagTypesValues = [
@@ -14,4 +15,5 @@ export const tagTypesValues = [
   TagTypes.PATIENTS,
   TagTypes.SUPER_ADMIN,
   TagTypes.SCHEDULE,
+  TagTypes.USER,
 ];

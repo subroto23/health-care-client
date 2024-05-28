@@ -4,7 +4,6 @@ import Image from "next/image";
 import assets from "@/assets";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import useMediaQuery from "@mui/material/useMediaQuery";
 
 const AuthButton = dynamic(() => import("@/components/ui/AuthButton"), {
   ssr: false,
