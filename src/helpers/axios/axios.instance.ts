@@ -3,7 +3,8 @@ import {
   TErrorResponseDataFromServer,
   TResponseDataFromServer,
 } from "@/interfaces";
-import { getFromLocalStorage } from "@/utlis/localStorage";
+import { getNewAccessToken } from "@/services/authService/auth.service";
+import { getFromLocalStorage, localStoreSaveInfo } from "@/utlis/localStorage";
 import axios from "axios";
 
 const instance = axios.create();
@@ -37,16 +38,26 @@ instance.interceptors.response.use(
     };
     return responseObj;
   },
-  function (error) {
+  async function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    const responseObj: TErrorResponseDataFromServer = {
-      statusCode: error?.response?.data?.statusCode || 5000,
-      message: error?.response?.data?.message || "Something went wrong !!!",
-      errorMessages: error?.response?.data?.message,
-    };
+    const config = error?.config;
+    if (error?.response?.status === 500 && !config.sent) {
+      config.sent = true;
+      const response = await getNewAccessToken();
+      const accessToken = response?.data?.accessToken;
+      config.headers["Authorization"] = accessToken;
+      localStoreSaveInfo(authStorageSaveKey, accessToken);
+      return instance(config);
+    } else {
+      const responseObj: TErrorResponseDataFromServer = {
+        statusCode: error?.response?.data?.statusCode || 5000,
+        message: error?.response?.data?.message || "Something went wrong !!!",
+        errorMessages: error?.response?.data?.message,
+      };
 
-    return responseObj;
+      return responseObj;
+    }
   }
 );
 export { instance };
