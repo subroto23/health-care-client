@@ -21,9 +21,19 @@ export const defaultValues = {
   file: {},
 };
 
-export const specilityValidationSchema = z.object({
-  title: z.string({ required_error: "Specility Title is required" }),
-  file: z.instanceof(File),
+const specilistValidationSchema = z.object({
+  title: z
+    .string()
+    .min(3, { message: "Title should be at least 3 characters" })
+    .refine((val) => val.trim().length > 0, {
+      message: "Title is required",
+    }),
+  file: z
+    .instanceof(File)
+    .or(z.null())
+    .refine((file) => file instanceof File, {
+      message: "Icon photo is required",
+    }),
 });
 
 const HCModelBoxComponent = ({ open, setOpen }: IModelProps) => {
@@ -45,7 +55,7 @@ const HCModelBoxComponent = ({ open, setOpen }: IModelProps) => {
     <HcModelBox open={open} setOpen={setOpen} title={"Create Speciality"}>
       <HCForm
         onSubmit={handleSubmitButton}
-        resolver={zodResolver(specilityValidationSchema)}
+        resolver={zodResolver(specilistValidationSchema)}
         defaultValues={defaultValues}
       >
         <Grid container spacing={3} direction={"column"} px={{ md: 2 }}>

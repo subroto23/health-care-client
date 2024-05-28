@@ -1,4 +1,4 @@
-import { SxProps, TextField } from "@mui/material";
+import { MenuItem, SxProps, TextField } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
 
 type TFormControlledValues = {
@@ -9,9 +9,10 @@ type TFormControlledValues = {
   fullWidth?: boolean;
   sx?: SxProps;
   placeholder?: string;
+  items: string[];
 };
 
-const HCInputForm = ({
+const HCSelectForm = ({
   name,
   label,
   placeholder,
@@ -19,6 +20,7 @@ const HCInputForm = ({
   size = "medium",
   fullWidth = false,
   sx,
+  items,
 }: TFormControlledValues) => {
   const { control } = useFormContext();
   return (
@@ -33,15 +35,24 @@ const HCInputForm = ({
           placeholder={placeholder ? placeholder : label}
           type={type}
           variant="outlined"
+          select
           size={size}
           fullWidth={fullWidth}
           sx={{ ...sx }}
           error={!!error?.message}
           helperText={error?.message}
-        />
+        >
+          {items?.map((val) => {
+            return (
+              <MenuItem key={val} value={val}>
+                {val}
+              </MenuItem>
+            );
+          })}
+        </TextField>
       )}
     />
   );
 };
 
-export default HCInputForm;
+export default HCSelectForm;

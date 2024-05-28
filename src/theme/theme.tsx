@@ -18,7 +18,6 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           padding: "8px 24px",
-          color: "#ffff",
           textTransform: "capitalize",
           "&.MuiButto-container": {
             backgroundColor: "#04A7C3",
