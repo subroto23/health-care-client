@@ -1,10 +1,13 @@
 import { authStorageSaveKey } from "@/components/constants/globalConstants";
-import { instance as axiosInstance } from "@/helpers/axios/axios.instance";
+import { instance } from "@/helpers/axios/axios.instance";
+// import { instance as axiosInstance } from "@/helpers/axios/axios.instance";
 import {
   getFromLocalStorage,
   localStoreSaveInfo,
   removeUserToLocalStorage,
 } from "@/utlis/localStorage";
+import Email from "@mui/icons-material/Email";
+import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
 export const storedUserInfo = (accessToken: string) => {
@@ -15,13 +18,17 @@ export const storedUserInfo = (accessToken: string) => {
 export const getUserInfo = () => {
   const token = getFromLocalStorage(authStorageSaveKey);
   if (!token) {
-    return "";
+    return null;
   }
-  const decoded: any = jwtDecode(token);
-  return {
-    ...decoded,
-    role: decoded?.role.toLowerCase(),
-  };
+  try {
+    const decoded: any = jwtDecode(token);
+    return {
+      ...decoded,
+      role: decoded?.role.toLowerCase(),
+    };
+  } catch (error) {
+    return { name: "", role: "" };
+  }
 };
 
 export const isLoggedIn = () => {
@@ -36,13 +43,17 @@ export const removeUser = () => {
 };
 
 export const getNewAccessToken = async () => {
-  const newToken = await axiosInstance({
-    url: `$${process.env.NEXT_PUBLIC_BACKEND_API}/auth/refresh-token`,
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  });
-  return newToken;
+  try {
+    const newToken = await instance({
+      url: `${process.env.NEXT_PUBLIC_BACKEND_API}/auth/refresh-token`,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    });
+    return newToken;
+  } catch (error) {
+    console.log(error);
+  }
 };

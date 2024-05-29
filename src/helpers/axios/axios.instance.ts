@@ -22,8 +22,7 @@ instance.interceptors.request.use(
     }
     return config;
   },
-  function (error) {
-    // Do something with request error
+  async function (error) {
     return Promise.reject(error);
   }
 );
@@ -42,13 +41,12 @@ instance.interceptors.response.use(
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     const config = error?.config;
-    if (error?.response?.status === 500 && !config.sent) {
+    if (error?.response?.status === 403 && !config.sent) {
       config.sent = true;
       const response = await getNewAccessToken();
       const accessToken = response?.data?.accessToken;
-      config.headers["Authorization"] = accessToken;
       localStoreSaveInfo(authStorageSaveKey, accessToken);
-      return instance(config);
+      return await instance(config);
     } else {
       const responseObj: TErrorResponseDataFromServer = {
         statusCode: error?.response?.data?.statusCode || 5000,

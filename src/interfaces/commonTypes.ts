@@ -1,7 +1,6 @@
 import { USER_ROLE } from "@/components/constants/userRole/UserRole";
 import { SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
-import { number, string } from "zod";
 
 export type TMeta = {
   page: number;
@@ -29,3 +28,8 @@ export interface IDashbordItem {
   icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & { muiName: string };
   child?: IDashbordItem[];
 }
+
+export type TModelProps = {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};

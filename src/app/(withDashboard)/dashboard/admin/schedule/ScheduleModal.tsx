@@ -51,7 +51,7 @@ const ScheduleModal = ({ open, setOpen }: TModelProps) => {
               <Grid item xs={12} sm={6}>
                 <HCDatePicker name="endDate" label="End Date" />
               </Grid>
-              {/* Start Time */}
+              {/* EndTime */}
               <Grid item xs={12} sm={6}>
                 <HCTimePicker name="endTime" label="End Time" />
               </Grid>
