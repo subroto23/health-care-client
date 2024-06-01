@@ -21,21 +21,17 @@ const doctorScheduleApi = baseApi.injectEndpoints({
         method: "GET",
         params: arg,
       }),
-      transformResponse: (response: any, meta: TMeta) => {
-        return {
-          schedules: response?.data,
-          meta,
-        };
-      },
       providesTags: [TagTypes.DOCTOR_SCHEDULE],
     }),
 
     //Delete
     deleteDoctorsSchedule: build.mutation({
-      query: ({ id }) => ({
-        url: `/doctor-schedule/${id}`,
-        method: "DELETE",
-      }),
+      query: ({ id }) => {
+        return {
+          url: `/doctor-schedule/${id}`,
+          method: "DELETE",
+        };
+      },
       invalidatesTags: [TagTypes.DOCTOR_SCHEDULE],
     }),
   }),

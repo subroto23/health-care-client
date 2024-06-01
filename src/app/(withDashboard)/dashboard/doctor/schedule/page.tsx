@@ -2,8 +2,11 @@
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import SchdeduleModel from "./SchdeduleModel";
+import DoctorScheduleTable from "./ScheduleTableDoctor";
+import { useGetAllDoctorSchedulesQuery } from "@/redux/api/doctorScheduleApi";
 const Schedules = () => {
   const [open, setOpen] = useState(false);
+  const { data, isLoading } = useGetAllDoctorSchedulesQuery({});
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -44,6 +47,7 @@ const Schedules = () => {
           Your Schedules
         </Typography>
       </Box>
+      {!isLoading && <DoctorScheduleTable payload={data} />}
     </>
   );
 };
