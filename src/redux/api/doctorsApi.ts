@@ -39,11 +39,22 @@ const doctorApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [TagTypes.DOCTORS],
     }),
+    //Delete
+    updateDoctorInfo: build.mutation({
+      query: ({ doctorId, ...data }) => ({
+        url: `/doctors/${doctorId}`,
+        method: "PATCH",
+        data,
+        contentType: "application/json",
+      }),
+      invalidatesTags: [TagTypes.DOCTORS],
+    }),
   }),
 });
 
 export const {
   useCreateDoctorMutation,
   useGetAllDoctorsQuery,
+  useUpdateDoctorInfoMutation,
   useDeleteDoctorsMutation,
 } = doctorApi;

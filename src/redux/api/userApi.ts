@@ -1,7 +1,7 @@
 import { TagTypes } from "../tagTypes/tagTypes";
 import { baseApi } from "./baseApi";
 
-const useApi = baseApi.injectEndpoints({
+const userApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     //Get Me
     getSingleUser: build.query({
@@ -25,4 +25,4 @@ const useApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetSingleUserQuery, useUpdateUserInfoMutation } = useApi;
+export const { useGetSingleUserQuery, useUpdateUserInfoMutation } = userApi;
