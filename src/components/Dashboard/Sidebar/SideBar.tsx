@@ -17,8 +17,8 @@ import SidebarLink from "./SidebarLink";
 const SideBar = () => {
   const [userRole, setUserRole] = useState("");
   useEffect(() => {
-    const { role } = getUserInfo();
-    setUserRole(role);
+    const userInfo = getUserInfo();
+    setUserRole(userInfo?.role);
   }, []);
 
   const sideBarItems = generateMenuItemByRole(userRole);

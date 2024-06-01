@@ -18,8 +18,8 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const [userEmail, setUserEmail] = React.useState("");
   const { data, isLoading } = useGetSingleUserQuery({});
   React.useEffect(() => {
-    const { email } = getUserInfo();
-    setUserEmail(email);
+    const userInfo = getUserInfo();
+    setUserEmail(userInfo?.email);
   }, []);
 
   const [mobileOpen, setMobileOpen] = React.useState(false);

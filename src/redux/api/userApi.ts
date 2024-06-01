@@ -11,7 +11,18 @@ const useApi = baseApi.injectEndpoints({
       }),
       providesTags: [TagTypes.USER],
     }),
+
+    //Update User Info
+    updateUserInfo: build.mutation({
+      query: (data) => ({
+        url: "/users/update-profile",
+        method: "PATCH",
+        data,
+        contentType: "multipart/form-data",
+      }),
+      invalidatesTags: [TagTypes.USER],
+    }),
   }),
 });
 
-export const { useGetSingleUserQuery } = useApi;
+export const { useGetSingleUserQuery, useUpdateUserInfoMutation } = useApi;

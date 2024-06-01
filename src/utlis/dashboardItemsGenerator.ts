@@ -9,9 +9,15 @@ import BookOnlineIcon from "@mui/icons-material/BookOnline";
 import ReviewsIcon from "@mui/icons-material/Reviews";
 import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
 import ReceiptIcon from "@mui/icons-material/Receipt";
+import PersonIcon from "@mui/icons-material/Person";
 
 export const generateMenuItemByRole = (role: string): IDashbordItem[] => {
   const roleMenues: IDashbordItem[] = [];
+  const defaultRoute = {
+    title: "Profile",
+    path: `${role}/profile`,
+    icon: PersonIcon,
+  };
   switch (role) {
     case USER_ROLE.SUPER_ADMIN:
       roleMenues.push(
@@ -112,5 +118,5 @@ export const generateMenuItemByRole = (role: string): IDashbordItem[] => {
     default:
       break;
   }
-  return [...roleMenues];
+  return [...roleMenues, defaultRoute];
 };
