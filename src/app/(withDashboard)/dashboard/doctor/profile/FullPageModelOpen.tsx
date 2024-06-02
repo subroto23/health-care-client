@@ -9,10 +9,12 @@ import { Gender } from "@/components/constants/globalConstants";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import Loader from "@/components/ui/Loader";
 import MultipuleSelectorSpecilitiesForDoctor from "./MultipuleSelectorChip";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetAllSpecilityQuery } from "@/redux/api/specilityApi";
-import { useUpdateDoctorInfoMutation } from "@/redux/api/doctorsApi";
-import { getUserInfo } from "@/services/authService/auth.service";
+import {
+  useGetSingleDoctorsQuery,
+  useUpdateDoctorInfoMutation,
+} from "@/redux/api/doctorsApi";
 
 type TProps = {
   open: boolean;
@@ -20,9 +22,12 @@ type TProps = {
 };
 
 const FullPageProfileUpdate = ({ open, setOpen }: TProps) => {
-  const { data, isLoading } = useGetSingleUserQuery({});
+  const { data: userInfo, isLoading: loader } = useGetSingleUserQuery({});
+  const { data, isLoading } = useGetSingleDoctorsQuery({ id: userInfo?.id });
+
   const [selectedValue, setSelectedValue] = useState<string[]>([]);
   const [updateInfo, { isLoading: updating }] = useUpdateDoctorInfoMutation();
+
   const { data: specialities, isLoading: loderSpecility } =
     useGetAllSpecilityQuery({});
   if (isLoading || updating || loderSpecility) {
@@ -36,6 +41,7 @@ const FullPageProfileUpdate = ({ open, setOpen }: TProps) => {
     };
   });
 
+  //
   const handleSubmit = async (values: FieldValues) => {
     try {
       values["specialities"] = specilitiesAfterFormating;
@@ -49,7 +55,6 @@ const FullPageProfileUpdate = ({ open, setOpen }: TProps) => {
       toast.error("Failed to Update !!!");
     }
   };
-
   const defaultValues = {
     name: data?.name,
     contactNumber: data?.contactNumber,
@@ -62,7 +67,12 @@ const FullPageProfileUpdate = ({ open, setOpen }: TProps) => {
     experience: data?.experience,
     gender: data?.gender,
   };
-
+  //Set Default Specilities
+  const doctorSpecility = data?.doctorSpecialties;
+  useEffect(() => {
+    const specilityIds = doctorSpecility?.map((el: any) => el.specialitiesId);
+    setSelectedValue(specilityIds);
+  }, [doctorSpecility]);
   return (
     <HCFullScreenDialog
       open={open}
