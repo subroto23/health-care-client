@@ -33,3 +33,10 @@ export type TModelProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+export interface IJwtPayload {
+  email: string; // The subject of the token (usually the user's ID)
+  role: string; // The user's role
+  iat: number; // The token's issued at timestamp
+  exp: number; // The token's expiration timestamp
+}

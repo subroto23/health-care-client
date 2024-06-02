@@ -8,9 +8,11 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import Link from "next/link";
-import { removeUser } from "@/services/authService/auth.service";
 import { useRouter } from "next/navigation";
 import { profileDatas } from "./ProfilesData";
+import { logout } from "@/services/actions/logout";
+import { cookies } from "next/headers";
+import { authProtectedKey } from "../constants/globalConstants";
 
 const NavbarProfile = () => {
   const { data, isLoading } = useGetSingleUserQuery({});
@@ -30,9 +32,7 @@ const NavbarProfile = () => {
   };
 
   const handleLogOut = () => {
-    removeUser();
-    router.push("/");
-    router.refresh();
+    logout(router);
   };
 
   return (

@@ -12,7 +12,7 @@ export const loginUser = async (data: FieldValues) => {
   });
   const response = await res.json();
   // Server Protected Routes
-  if (response) {
+  if (response?.success === true) {
     setAccessToken(response?.data?.accessToken, { redirect: "/dashboard" });
   }
 

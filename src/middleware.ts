@@ -5,37 +5,40 @@ import {
   authProtectedKey,
   authStorageSaveKey,
 } from "./components/constants/globalConstants";
-import { jwtDecode } from "jwt-decode";
+import { JwtPayload, jwtDecode } from "jwt-decode";
 import { getUserInfo } from "./services/authService/auth.service";
+import { IJwtPayload } from "./interfaces";
 
 // This function can be marked `async` if using `await` inside
+const authRoutes = ["/login", "/signup"];
 const commonPath = ["/dashboard", "/dashboard/change-password"];
 const rolebasedPrivateRoutes = {
-  DOCTOR: [/^\/dashboard\/doctor/],
-  PATIENT: [/^\/dashboard\/patient/],
-  ADMIN: [/^\/dashboard\/admin/],
-  SUPER_ADMIN: [/^\/dashboard\/super-admin/],
+  DOCTOR: [/^\/dashboard\/doctor\/?.*/],
+  PATIENT: [/^\/dashboard\/patient\/?.*/],
+  ADMIN: [/^\/dashboard\/admin\/?.*/],
+  SUPER_ADMIN: [/^\/dashboard\/super-admin\/?.*/],
 };
 export function middleware(request: NextRequest) {
   const pathName = request?.nextUrl?.pathname;
   const accessToken = cookies().get(authProtectedKey);
   if (!accessToken) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    if (authRoutes.includes(pathName)) {
+      return NextResponse.next();
+    } else {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
   }
   if (accessToken && commonPath.includes(pathName)) {
     return NextResponse.next();
   }
+  const decodedData: IJwtPayload = jwtDecode(accessToken?.value);
+  const role = decodedData?.role;
 
-  const userInfo = getUserInfo();
-  const role = userInfo?.role;
+  const rolebasedRoutes =
+    rolebasedPrivateRoutes[role as keyof typeof rolebasedPrivateRoutes];
 
-  if (
-    role &&
-    rolebasedPrivateRoutes[role as keyof typeof rolebasedPrivateRoutes]
-  ) {
-    const routes =
-      rolebasedPrivateRoutes[role as keyof typeof rolebasedPrivateRoutes];
-    if (routes.some((route) => pathName.match(route))) {
+  if (role && rolebasedRoutes) {
+    if (rolebasedRoutes.some((route) => pathName.match(route))) {
       return NextResponse.next();
     }
   }
@@ -44,5 +47,5 @@ export function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: "/dashboard/:page*",
+  matcher: ["/login", "/signup", "/dashboard/:page*"],
 };

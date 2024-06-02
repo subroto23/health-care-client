@@ -10,14 +10,21 @@ import ReviewsIcon from "@mui/icons-material/Reviews";
 import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import PersonIcon from "@mui/icons-material/Person";
-
+import KeyIcon from "@mui/icons-material/Key";
 export const generateMenuItemByRole = (role: string): IDashbordItem[] => {
   const roleMenues: IDashbordItem[] = [];
-  const defaultRoute = {
-    title: "Profile",
-    path: `${role}/profile`,
-    icon: PersonIcon,
-  };
+  const defaultRoute = [
+    {
+      title: "Profile",
+      path: `${role}/profile`,
+      icon: PersonIcon,
+    },
+    {
+      title: "Change Password",
+      path: `/change-password`,
+      icon: KeyIcon,
+    },
+  ];
   switch (role) {
     case USER_ROLE.SUPER_ADMIN:
       roleMenues.push(
@@ -118,5 +125,5 @@ export const generateMenuItemByRole = (role: string): IDashbordItem[] => {
     default:
       break;
   }
-  return [...roleMenues, defaultRoute];
+  return [...roleMenues, ...defaultRoute];
 };
