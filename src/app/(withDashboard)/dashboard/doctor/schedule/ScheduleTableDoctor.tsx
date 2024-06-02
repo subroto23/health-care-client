@@ -1,6 +1,6 @@
 import * as React from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Pagination } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
 import { toast } from "sonner";
@@ -8,7 +8,11 @@ import { dateFormater } from "@/utlis/dateFormeting";
 import convertTo12HourTime from "@/utlis/convertTime12Hour";
 import { useDeleteDoctorsScheduleMutation } from "@/redux/api/doctorScheduleApi";
 
-const DoctorScheduleTable = ({ payload }: any) => {
+const DoctorScheduleTable = ({ payload, page, setPage }: any) => {
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+
   const { data, meta } = payload;
   const rows = data?.map((el: any) => ({
     id: el.schedule.id,
@@ -88,7 +92,7 @@ const DoctorScheduleTable = ({ payload }: any) => {
         if (result.isConfirmed) {
           await deleteSchedule(id)
             .unwrap()
-            .then((res) => {
+            .then((res: any) => {
               if (res?.id) {
                 Swal.fire({
                   title: "Deleted!",
@@ -101,9 +105,27 @@ const DoctorScheduleTable = ({ payload }: any) => {
       })
       .catch((err) => toast.error("Error!! Deleted"));
   };
+  const countPageNumber = Math.ceil(meta?.total / meta?.limit);
   return (
     <div style={{ height: 400, width: "100%", margin: "30px 0" }}>
-      <DataGrid rows={rows} columns={columns} sx={{ py: 2 }} />
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        sx={{ py: 2 }}
+        slots={{
+          footer: () => {
+            return (
+              <Box sx={{ justifyContent: "center", display: "flex" }}>
+                <Pagination
+                  count={countPageNumber}
+                  page={page}
+                  onChange={handleChange}
+                />
+              </Box>
+            );
+          },
+        }}
+      />
     </div>
   );
 };

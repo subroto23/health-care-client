@@ -1,6 +1,6 @@
 import * as React from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Pagination } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
 import { toast } from "sonner";
@@ -8,7 +8,7 @@ import { dateFormater } from "@/utlis/dateFormeting";
 import { useDeleteScheduleMutation } from "@/redux/api/scheduleApi";
 import { timeFormatter } from "@/utlis/timeFormetter";
 
-const SchedulesTable = ({ schedules, meta }: any) => {
+const SchedulesTable = ({ schedules, meta, page, setPage }: any) => {
   const updateSchedule = schedules?.map((el: any) => {
     return {
       id: el?.id,
@@ -100,9 +100,31 @@ const SchedulesTable = ({ schedules, meta }: any) => {
       })
       .catch(() => toast.error("Failed to delete !!!"));
   };
+
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+  const countPageNumber = Math.ceil(meta?.total / meta?.limit);
   return (
     <div style={{ height: 400, width: "100%", margin: "30px 0" }}>
-      <DataGrid rows={updateSchedule} columns={columns} sx={{ py: 2 }} />
+      <DataGrid
+        rows={updateSchedule}
+        columns={columns}
+        sx={{ py: 2 }}
+        slots={{
+          footer: () => {
+            return (
+              <Box sx={{ justifyContent: "center", display: "flex" }}>
+                <Pagination
+                  count={countPageNumber}
+                  page={page}
+                  onChange={handleChange}
+                />
+              </Box>
+            );
+          },
+        }}
+      />
     </div>
   );
 };

@@ -7,7 +7,12 @@ import Loader from "@/components/ui/Loader";
 import SchedulesTable from "./SchedulesTable";
 
 const Schedule = () => {
-  const { data, isLoading } = useGetAllScheduleQuery({});
+  const [page, setPage] = useState(1);
+  //Pagination
+  const query: Record<string, any> = {};
+  query["page"] = page;
+  //
+  const { data, isLoading } = useGetAllScheduleQuery({ ...query });
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);

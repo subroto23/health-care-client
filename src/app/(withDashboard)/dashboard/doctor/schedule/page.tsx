@@ -5,8 +5,13 @@ import SchdeduleModel from "./SchdeduleModel";
 import DoctorScheduleTable from "./ScheduleTableDoctor";
 import { useGetAllDoctorSchedulesQuery } from "@/redux/api/doctorScheduleApi";
 const Schedules = () => {
+  const [page, setPage] = useState(1);
   const [open, setOpen] = useState(false);
-  const { data, isLoading } = useGetAllDoctorSchedulesQuery({});
+  //Pagination
+  const query: Record<string, any> = {};
+  query["page"] = page;
+  //
+  const { data, isLoading } = useGetAllDoctorSchedulesQuery({ ...query });
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -47,7 +52,9 @@ const Schedules = () => {
           Your Schedules
         </Typography>
       </Box>
-      {!isLoading && <DoctorScheduleTable payload={data} />}
+      {!isLoading && (
+        <DoctorScheduleTable payload={data} setPage={setPage} page={page} />
+      )}
     </>
   );
 };
