@@ -22,8 +22,14 @@ type TProps = {
 };
 
 const FullPageProfileUpdate = ({ open, setOpen }: TProps) => {
-  const { data: userInfo, isLoading: loader } = useGetSingleUserQuery({});
-  const { data, isLoading } = useGetSingleDoctorsQuery({ id: userInfo?.id });
+  const {
+    data: userInfo,
+    isLoading: loader,
+    refetch,
+  } = useGetSingleUserQuery({});
+  const { data, isLoading } = useGetSingleDoctorsQuery({
+    id: userInfo?.id,
+  });
 
   const [selectedValue, setSelectedValue] = useState<string[]>([]);
   const [updateInfo, { isLoading: updating }] = useUpdateDoctorInfoMutation();
@@ -49,6 +55,7 @@ const FullPageProfileUpdate = ({ open, setOpen }: TProps) => {
       const res = await updateInfo(values).unwrap();
       if (res) {
         toast.success(res?.message);
+        refetch();
         setOpen(false);
       }
     } catch (error) {

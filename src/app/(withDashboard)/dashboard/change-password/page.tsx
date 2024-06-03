@@ -3,10 +3,11 @@ import HCForm from "@/components/forms/FormProvider";
 import HCInputForm from "@/components/forms/HCInputForm";
 import { useChangePasswordMutation } from "@/redux/api/authApi";
 import { logout } from "@/services/actions/logout";
-import { Box, Button, Container, Grid } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
+import KeyIcon from "@mui/icons-material/Key";
 
 const ChangePassword = () => {
   const [changePassword] = useChangePasswordMutation();
@@ -31,14 +32,40 @@ const ChangePassword = () => {
     <>
       <Container>
         <Box
-          maxWidth={500}
+          maxWidth={700}
           sx={{
             paddingY: { xs: 2 },
             marginX: "auto",
-            boxShadow: 2,
+            border: { xs: "1px solid black", md: "none" },
             paddingX: "10px",
           }}
         >
+          {/* Key Icon */}
+          <Box
+            sx={{
+              textAlign: "center",
+              marginBottom: 1,
+
+              "& svg": {
+                width: 100,
+                height: 100,
+                color: "primary.main",
+              },
+            }}
+          >
+            <KeyIcon />
+          </Box>
+
+          <Typography
+            sx={{
+              marginBottom: 4,
+              fontWeight: 600,
+              fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+              textAlign: "center",
+            }}
+          >
+            Change Your Password
+          </Typography>
           <HCForm onSubmit={handleSubmit} defaultValues={defaultValues}>
             <Grid container spacing={2}>
               {/* Password Field */}
