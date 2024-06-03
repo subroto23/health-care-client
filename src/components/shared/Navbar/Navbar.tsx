@@ -4,12 +4,30 @@ import Image from "next/image";
 import assets from "@/assets";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { usePathname } from "next/navigation";
 
 const AuthButton = dynamic(() => import("@/components/ui/AuthButton"), {
   ssr: false,
 });
-
 const Navbar = () => {
+  const pathName = usePathname();
+  const navLinks = [
+    {
+      id: 1,
+      path: "/",
+      title: "Home",
+    },
+    {
+      id: 2,
+      path: "/doctors",
+      title: "Doctors",
+    },
+    {
+      id: 3,
+      path: "/medicins",
+      title: "Medicins",
+    },
+  ];
   return (
     <Box
       sx={{
@@ -54,31 +72,21 @@ const Navbar = () => {
               gap={{ xs: 2, sm: 5 }}
               alignItems={"center"}
             >
-              <Typography
-                variant="h6"
-                component={Link}
-                href="/"
-                color={"primary"}
-                fontWeight={600}
-              >
-                Home
-              </Typography>
-              <Typography
-                variant="h6"
-                component={Link}
-                href="/doctors"
-                fontWeight={600}
-              >
-                Doctors
-              </Typography>
-              <Typography
-                variant="h6"
-                component={Link}
-                href="/medicine"
-                fontWeight={600}
-              >
-                Medicine
-              </Typography>
+              {navLinks?.map((el) => {
+                return (
+                  <>
+                    <Typography
+                      variant="h6"
+                      component={Link}
+                      href={el?.path}
+                      color={el?.path === pathName ? "primary.main" : ""}
+                      fontWeight={600}
+                    >
+                      {el?.title}
+                    </Typography>
+                  </>
+                );
+              })}
             </Stack>
           </Box>
 

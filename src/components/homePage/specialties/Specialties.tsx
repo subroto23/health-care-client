@@ -94,19 +94,21 @@ const Specialties = async () => {
               );
             })}
           </Grid>
-          <Button
-            variant="outlined"
-            sx={{ marginTop: { xs: "20px", md: "40px" } }}
-          >
-            <Typography
-              variant="h6"
-              component={"p"}
-              textTransform={"capitalize"}
-              fontWeight={400}
+          <Link href="/doctors">
+            <Button
+              variant="outlined"
+              sx={{ marginTop: { xs: "20px", md: "40px" } }}
             >
-              View all
-            </Typography>
-          </Button>
+              <Typography
+                variant="h6"
+                component={"p"}
+                textTransform={"capitalize"}
+                fontWeight={400}
+              >
+                View all
+              </Typography>
+            </Button>
+          </Link>
         </Box>
       </Container>
     </Box>

@@ -23,6 +23,7 @@ import { useState } from "react";
 import MultipuleSelectorSpecilitiesForDoctor from "@/app/(withDashboard)/dashboard/doctor/profile/MultipuleSelectorChip";
 import { NodeNextRequest } from "next/dist/server/base-http/node";
 import { useGetAllSpecilityQuery } from "@/redux/api/specilityApi";
+import Link from "next/link";
 
 const DoctorsPage = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -94,6 +95,8 @@ const DoctorsPage = () => {
             spacing={2}
             direction={{ xs: "column", sm: "row" }}
             sx={{
+              backgroundColor: "#ffff",
+              borderRadius: "10px",
               borderTop: idx === 0 ? "1px solid rgba(20,20,20,0.2)" : "none",
               borderBottom:
                 idx === data.doctors.length - 1
@@ -171,6 +174,8 @@ const DoctorsPage = () => {
                 </Box>
                 <Box>
                   <Button
+                    component={Link}
+                    href={`/doctors/${el?.id}`}
                     sx={{
                       backgroundColor: "#003846",
                       marginY: 1,
