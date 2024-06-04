@@ -19,17 +19,23 @@ import convertTo12HourTime from "@/utlis/convertTime12Hour";
 import { heading } from "@/app/(withDashboard)/dashboard/doctor/profile/utlis/heading";
 import { useCreateAppointmentMutation } from "@/redux/api/appointmentApi";
 import { toast } from "sonner";
+import { useInitialPaymentMutation } from "@/redux/api/paymentApi";
+import { useRouter } from "next/navigation";
 
 const DoctorInformation = ({ params }) => {
   const doctorId = params?.doctorId;
   const { data, isLoading } = useGetSingleDoctorsQuery({ id: doctorId });
   const { data: schedules, isLoading: loader } =
     useGetAllDoctorSchedulesForPatientQuery({ id: data?.id });
+  const [initialPayment] = useInitialPaymentMutation();
   const [createAppointment] = useCreateAppointmentMutation();
+  const router = useRouter();
 
   if (isLoading || loader) {
     return <Loader />;
   }
+
+  //Handle Response
   const handleClicked = async (scheduleId) => {
     const appointmentValues = {
       doctorId: data?.id,
@@ -38,7 +44,11 @@ const DoctorInformation = ({ params }) => {
     try {
       const res = await createAppointment(appointmentValues).unwrap();
       if (res?.id) {
-        toast.success(res?.message);
+        const initPayment = await initialPayment({ id: res?.id }).unwrap();
+        if (initPayment) {
+          router.push(initPayment?.paymentUrl);
+          toast.success("Please Pay your appointment fee");
+        }
       }
     } catch (error) {
       toast.error("Failed to Update !!!");
