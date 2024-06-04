@@ -10,7 +10,10 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { useGetAllDoctorSchedulesQuery } from "@/redux/api/doctorScheduleApi";
+import {
+  useGetAllDoctorSchedulesForPatientQuery,
+  useGetAllDoctorSchedulesQuery,
+} from "@/redux/api/doctorScheduleApi";
 import { dateFormater } from "@/utlis/dateFormeting";
 import convertTo12HourTime from "@/utlis/convertTime12Hour";
 import { heading } from "@/app/(withDashboard)/dashboard/doctor/profile/utlis/heading";
@@ -20,9 +23,8 @@ import { toast } from "sonner";
 const DoctorInformation = ({ params }) => {
   const doctorId = params?.doctorId;
   const { data, isLoading } = useGetSingleDoctorsQuery({ id: doctorId });
-  const { data: schedules, isLoading: loader } = useGetAllDoctorSchedulesQuery(
-    {}
-  );
+  const { data: schedules, isLoading: loader } =
+    useGetAllDoctorSchedulesForPatientQuery({ id: data?.id });
   const [createAppointment] = useCreateAppointmentMutation();
 
   if (isLoading || loader) {
@@ -42,13 +44,23 @@ const DoctorInformation = ({ params }) => {
       toast.error("Failed to Update !!!");
     }
   };
-
   return (
     <>
       <Container>
         <DoctorInfoCard data={data} />
         <Box mb={8}>
-          <Box my={2}>{heading("Choose your Appointment Time")}</Box>
+          <Box my={2}>
+            {schedules?.data?.length > 0 ? (
+              <>{heading("Choose your Appointment Time")} </>
+            ) : (
+              <>
+                <Typography variant="h6" textAlign={"center"} my={8}>
+                  Sorry!! There is no appointment time availabele.
+                  <br /> All appointments have booked
+                </Typography>
+              </>
+            )}
+          </Box>
           <Grid container spacing={2}>
             {schedules?.data?.map((el) => {
               if (el?.isBooked) {

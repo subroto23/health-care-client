@@ -18,10 +18,7 @@ import Image from "next/image";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { useGetAllDoctorsQuery } from "@/redux/api/doctorsApi";
 import GenerateRating from "@/utlis/rating";
-import { heading } from "@/app/(withDashboard)/dashboard/doctor/profile/utlis/heading";
 import { useState } from "react";
-import MultipuleSelectorSpecilitiesForDoctor from "@/app/(withDashboard)/dashboard/doctor/profile/MultipuleSelectorChip";
-import { NodeNextRequest } from "next/dist/server/base-http/node";
 import { useGetAllSpecilityQuery } from "@/redux/api/specilityApi";
 import Link from "next/link";
 
@@ -113,6 +110,10 @@ const DoctorsPage = () => {
               },
               "&:last-of-type": {
                 borderBottom: "none",
+              },
+              "&:hover": {
+                backgroundColor: "#f5f5f5",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
               },
             }}
           >
