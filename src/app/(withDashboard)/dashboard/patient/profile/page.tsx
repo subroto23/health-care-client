@@ -1,24 +1,36 @@
 "use client";
-import Loader from "@/components/ui/Loader";
+import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
+import Image from "next/image";
+import EditIcon from "@mui/icons-material/Edit";
+import { useState } from "react";
 import {
   useGetSingleUserQuery,
   useUpdateUserInfoMutation,
 } from "@/redux/api/userApi";
-import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
-import Image from "next/image";
-import ProfileInformationDisplay from "./ProfileInformationDisplay";
+import { useGetSinglePatientsQuery } from "@/redux/api/patientApi";
 import HCAutoFileUpload from "@/components/forms/HCAutoFileUploading";
-import EditIcon from "@mui/icons-material/Edit";
-import { useState } from "react";
-import FullPageProfileUpdate from "./FullPageModelOpen";
+import Loader from "@/components/ui/Loader";
+import ProfileInformationDisplay from "./ProfileInformation";
+import FullPageProfileUpdate from "./FullPageProfileUpdate";
 
-const DoctorProfile = () => {
-  const { data, isLoading, refetch } = useGetSingleUserQuery({});
+const PatientProfile = () => {
   const [open, setOpen] = useState(false);
-  if (isLoading) {
-    <Loader />;
-  }
+  const { data: userInfo, isLoading } = useGetSingleUserQuery({});
+  const {
+    data,
+    isLoading: userInfoLoading,
+    refetch,
+  } = useGetSinglePatientsQuery({
+    id: userInfo?.id,
+  });
   const [uploadPhoto, { isLoading: uploading }] = useUpdateUserInfoMutation();
+
+  if (isLoading || userInfoLoading) {
+    return <Loader />;
+  }
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
   const handleFileUploader = (file: File) => {
     const formData = new FormData();
     formData.append("file", file);
@@ -26,17 +38,15 @@ const DoctorProfile = () => {
     uploadPhoto(formData);
     refetch();
   };
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   return (
     <Box>
       <Grid container direction={{ xs: "column", md: "row" }} spacing={2}>
         <Grid item xs={4}>
           <Image
-            src={data?.profilePhoto}
+            src={
+              data?.profilePhoto ||
+              "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
+            }
             height={500}
             width={500}
             alt="User Photo"
@@ -63,7 +73,7 @@ const DoctorProfile = () => {
                 Edit Profile
               </Typography>
               <IconButton>
-                <EditIcon sx={{ color: "#ffff", fontSize: "20px" }} />
+                <EditIcon />
               </IconButton>
             </Button>
           </Box>
@@ -78,4 +88,4 @@ const DoctorProfile = () => {
   );
 };
 
-export default DoctorProfile;
+export default PatientProfile;

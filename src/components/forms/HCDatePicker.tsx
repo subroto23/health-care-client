@@ -12,6 +12,7 @@ type TDatePickerType = {
   sx?: SxProps;
   size?: "small" | "medium";
   required?: boolean;
+  disablePast?: boolean;
 };
 
 const HCDatePicker = ({
@@ -21,6 +22,7 @@ const HCDatePicker = ({
   sx,
   size = "medium",
   required = false,
+  disablePast = true,
 }: TDatePickerType) => {
   const { control } = useFormContext();
   return (
@@ -33,7 +35,7 @@ const HCDatePicker = ({
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               timezone="system"
-              disablePast
+              disablePast={disablePast}
               {...field}
               name={name}
               label={label}

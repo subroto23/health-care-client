@@ -3,68 +3,68 @@ import { TagTypes } from "../tagTypes/tagTypes";
 import { baseApi } from "./baseApi";
 import { TResponseDoctors } from "@/app/(withDashboard)/dashboard/admin/doctors/doctoraType";
 
-const doctorApi = baseApi.injectEndpoints({
+const patientAPi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    createDoctor: build.mutation({
+    createPatient: build.mutation({
       query: (data) => ({
         url: "/users/create-doctor",
         method: "POST",
         data,
         contentType: "multipart/form-data",
       }),
-      invalidatesTags: [TagTypes.DOCTORS],
+      invalidatesTags: [TagTypes.PATIENTS],
     }),
 
     //Get All
-    getAllDoctors: build.query({
+    getAllPatients: build.query({
       query: (arg: Record<string, any>) => ({
-        url: "/doctors",
+        url: "/patients",
         method: "GET",
         params: arg,
       }),
       transformResponse: (response: TResponseDoctors[], meta: TMeta) => {
         return {
-          doctors: response,
+          patients: response,
           meta,
         };
       },
-      providesTags: [TagTypes.DOCTORS],
+      providesTags: [TagTypes.PATIENTS],
     }),
 
     //Get Single Doctors
-    getSingleDoctors: build.query({
+    getSinglePatients: build.query({
       query: ({ id }) => ({
-        url: `/doctors/${id}`,
+        url: `/patients/${id}`,
         method: "GET",
       }),
-      providesTags: [TagTypes.DOCTORS, TagTypes.USER],
+      providesTags: [TagTypes.PATIENTS, TagTypes.USER],
     }),
 
     //Delete
-    deleteDoctors: build.mutation({
+    deletePatients: build.mutation({
       query: ({ id }) => ({
-        url: `/doctors/${id}`,
+        url: `/patients/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: [TagTypes.DOCTORS],
+      invalidatesTags: [TagTypes.PATIENTS],
     }),
-    //Delete
-    updateDoctorInfo: build.mutation({
-      query: ({ doctorId, ...data }) => ({
-        url: `/doctors/${doctorId}`,
+    //Update
+    updatePatientsrInfo: build.mutation({
+      query: ({ patientId, ...data }) => ({
+        url: `/patients/${patientId}`,
         method: "PATCH",
         data,
         contentType: "application/json",
       }),
-      invalidatesTags: [TagTypes.DOCTORS],
+      invalidatesTags: [TagTypes.PATIENTS],
     }),
   }),
 });
 
 export const {
-  useCreateDoctorMutation,
-  useGetAllDoctorsQuery,
-  useGetSingleDoctorsQuery,
-  useUpdateDoctorInfoMutation,
-  useDeleteDoctorsMutation,
-} = doctorApi;
+  useCreatePatientMutation,
+  useGetAllPatientsQuery,
+  useGetSinglePatientsQuery,
+  useDeletePatientsMutation,
+  useUpdatePatientsrInfoMutation,
+} = patientAPi;
