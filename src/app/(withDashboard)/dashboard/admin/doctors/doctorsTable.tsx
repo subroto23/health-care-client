@@ -4,10 +4,7 @@ import { Box, Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
 import { toast } from "sonner";
-import {
-  useDeleteDoctorsMutation,
-  useGetAllDoctorsQuery,
-} from "@/redux/api/doctorsApi";
+import { useDeleteDoctorsMutation } from "@/redux/api/doctorsApi";
 
 const DoctorsTable = ({ doctors, meta }: any) => {
   const [deleteDoctors] = useDeleteDoctorsMutation();

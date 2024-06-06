@@ -43,7 +43,7 @@ const FullPageProfileUpdate = ({ open, setOpen }: TProps) => {
   const [updateInfo, { isLoading: updating }] =
     useUpdatePatientsrInfoMutation();
   //
-  if (loader || updating || isLoading) {
+  if (loader || isLoading) {
     <Loader />;
   }
   //Default Values
@@ -319,7 +319,7 @@ const FullPageProfileUpdate = ({ open, setOpen }: TProps) => {
               </Grid>
               <Grid item md={12} textAlign={"end"}>
                 <Button type="submit" sx={{ color: "#ffff" }}>
-                  Submit
+                  {updating ? "Updating..." : "Submit"}
                 </Button>
               </Grid>
             </Grid>

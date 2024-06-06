@@ -15,7 +15,7 @@ export const InformationCreating = (label: string, data: any) => {
           {label}
         </Typography>
         <Typography variant="h6" component={"h2"} fontWeight={600}>
-          {data}
+          {data || "N/A"}
         </Typography>
       </Box>
     </>
