@@ -86,12 +86,7 @@ const FullPageProfileUpdate = ({ open, setOpen }: TProps) => {
       setOpen={setOpen}
       title="Update Your Information"
     >
-      <Container
-        sx={{
-          border: { xs: "none", md: "1px solid gray" },
-          boxShadow: 3,
-        }}
-      >
+      <Container>
         <Box
           sx={{
             paddingY: { md: 5, xs: 2, sm: 3 },

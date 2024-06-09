@@ -40,12 +40,7 @@ const DiolagBoxForDoctor = ({ open, setOpen }: TProps) => {
       setOpen={setOpen}
       title="Create A New Doctor"
     >
-      <Container
-        sx={{
-          border: { xs: "none", md: "1px solid gray" },
-          boxShadow: 3,
-        }}
-      >
+      <Container>
         <Box
           sx={{
             paddingY: { md: 5, xs: 2, sm: 3 },
