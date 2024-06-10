@@ -16,8 +16,12 @@ const Appointments = () => {
     return <Loader />;
   }
   //Handle Payment
-  const handleControlTreatment = (id: string) => {
-    router.push(`/dashboard/doctor/treatment/${id}`);
+  const handleControlTreatment = (clickedValue: {
+    patientId: string;
+    appontmentId: string;
+  }) => {
+    const { patientId, appontmentId } = clickedValue;
+    router.push(`/dashboard/doctor/treatment/${patientId}/${appontmentId}`);
   };
   // Transform the data to include doctor name
   const transformValue = data?.map((el: any) => ({
@@ -61,7 +65,12 @@ const Appointments = () => {
           <Box>
             <Button
               variant="outlined"
-              onClick={() => handleControlTreatment(row?.patientId)}
+              onClick={() =>
+                handleControlTreatment({
+                  patientId: row?.patientId,
+                  appontmentId: row?.id,
+                })
+              }
             >
               Treatment
             </Button>

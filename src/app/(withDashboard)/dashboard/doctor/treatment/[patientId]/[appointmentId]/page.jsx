@@ -2,19 +2,17 @@
 import Loader from "@/components/ui/Loader";
 import { useGetSinglePatientsQuery } from "@/redux/api/patientApi";
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
-import { heading } from "../../profile/utlis/heading";
-import { InformationCreating } from "../../profile/utlis/descripton";
-import GenerateRating from "@/utlis/rating";
 import Image from "next/image";
 import Link from "next/link";
 import TabData from "@/components/Tab/TabData";
 
 const PatientTreatment = ({ params }) => {
-  const { data, isLoading } = useGetSinglePatientsQuery(params);
+  const { data, isLoading } = useGetSinglePatientsQuery({
+    id: params.patientId,
+  });
   if (isLoading) {
     return <Loader></Loader>;
   }
-  console.log(data);
   return (
     <>
       <Grid
@@ -90,8 +88,7 @@ const PatientTreatment = ({ params }) => {
             <Box>
               <Button
                 component={Link}
-                // href={`/doctors/${el?.id}`}
-                href="/"
+                href={`/dashboard/doctor/video-call`}
                 sx={{
                   backgroundColor: "#003846",
                   marginY: 1,
@@ -100,13 +97,13 @@ const PatientTreatment = ({ params }) => {
                   },
                 }}
               >
-                <Typography color="#ffff">Write Prescription</Typography>
+                <Typography color="#ffff">Video Call</Typography>
               </Button>
             </Box>
           </Box>
         </Grid>
       </Grid>
-      <TabData data={data} />
+      <TabData data={data} params={params} />
     </>
   );
 };

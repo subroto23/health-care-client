@@ -5,6 +5,7 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import PatientProfileInformation from "./PatientProfileInformation";
 import MediaclReport from "./MediaclReport";
+import Prescription from "@/app/(withDashboard)/dashboard/doctor/prescription/page";
 
 const AntTabs = styled(Tabs)({
   borderBottom: "1px solid #e8e8e8",
@@ -55,29 +56,11 @@ interface StyledTabsProps {
   onChange: (event: React.SyntheticEvent, newValue: number) => void;
 }
 
-const StyledTabs = styled((props: StyledTabsProps) => (
-  <Tabs
-    {...props}
-    TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
-  />
-))({
-  "& .MuiTabs-indicator": {
-    display: "flex",
-    justifyContent: "center",
-    backgroundColor: "transparent",
-  },
-  "& .MuiTabs-indicatorSpan": {
-    maxWidth: 40,
-    width: "100%",
-    backgroundColor: "#635ee7",
-  },
-});
-
 interface StyledTabProps {
   label: string;
 }
 
-export default function TabData({ data }: any) {
+export default function TabData({ data, params }: any) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -90,14 +73,14 @@ export default function TabData({ data }: any) {
         <AntTabs value={value} onChange={handleChange} aria-label="ant example">
           <AntTab label="Patient Health" />
           <AntTab label="Medical Report" />
-          <AntTab label="Create Video Call" />
+          <AntTab label="Make Prescription" />
         </AntTabs>
         <Box sx={{ p: 1 }} />
       </Box>
       <Box sx={{ p: 2 }}>
         {value === 0 && <PatientProfileInformation data={data} />}
         {value === 1 && <MediaclReport data={data} />}
-        {/*  {value === 2 && <VideoCallComponent />} */}
+        {value === 2 && <Prescription data={data} params={params} />}
       </Box>
     </Box>
   );

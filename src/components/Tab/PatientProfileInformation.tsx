@@ -1,6 +1,5 @@
 import { Box, Stack } from "@mui/material";
 import { calculateAge } from "@/utlis/ageCalculation";
-import { heading } from "@/app/(withDashboard)/dashboard/doctor/profile/utlis/heading";
 import { InformationCreating } from "@/app/(withDashboard)/dashboard/doctor/profile/utlis/descripton";
 import { convertBooleanToYesNo } from "@/utlis/convertYesNoValueToBooleanValue";
 const PatientProfileInformation = ({ data }: any) => {
