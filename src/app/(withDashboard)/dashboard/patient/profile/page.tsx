@@ -21,6 +21,7 @@ import ProfileInformationDisplay from "./ProfileInformation";
 import FullPageProfileUpdate from "./FullPageProfileUpdate";
 import { heading } from "../../doctor/profile/utlis/heading";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import assets from "@/assets";
 
 const PatientProfile = () => {
   const [open, setOpen] = useState(false);
@@ -47,6 +48,7 @@ const PatientProfile = () => {
     uploadPhoto(formData);
     refetch();
   };
+
   const columns: GridColDef[] = [
     {
       field: "reportName",
@@ -90,11 +92,12 @@ const PatientProfile = () => {
           >
             <Image
               src={
-                data?.profilePhoto ||
-                "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
+                data?.profilePhoto === null
+                  ? assets.images.logo
+                  : data?.profilePhoto
               }
-              height={500}
-              width={500}
+              height={200}
+              width={200}
               alt="User Photo"
             />
           </Box>
@@ -158,12 +161,18 @@ const PatientProfile = () => {
               >
                 Medical Reports
               </Typography>
-              <DataGrid
-                rows={data?.medicalReport}
-                columns={columns}
-                sx={{ py: 2 }}
-                hideFooter
-              />
+              {data?.medicalReport.length > 0 ? (
+                <DataGrid
+                  rows={data?.medicalReport}
+                  columns={columns}
+                  sx={{ py: 2 }}
+                  hideFooter
+                />
+              ) : (
+                <Typography textAlign={"center"} my={3}>
+                  No record Found
+                </Typography>
+              )}
             </Box>
           </Stack>
         </Grid>

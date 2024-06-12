@@ -19,6 +19,8 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/services/actions/loginUser";
 import { storedUserInfo } from "@/services/authService/auth.service";
+import { useState } from "react";
+import ForgorrenPasswordModelBox from "./ForgorrenPasswordModelBox";
 
 type Inputs = {
   password: string;
@@ -26,6 +28,7 @@ type Inputs = {
 };
 
 const LoginPage = () => {
+  const [open, setOpen] = useState(false);
   const router = useRouter();
   const {
     register,
@@ -221,12 +224,18 @@ const LoginPage = () => {
               {/* Forgotten Password */}
               <Stack textAlign={"end"}>
                 <Typography
+                  onClick={() => setOpen(true)}
                   component={"p"}
                   color={"primary.main"}
-                  sx={{ fontSize: { sm: "18px", md: "22px" }, fontWeight: 600 }}
+                  sx={{
+                    fontSize: { sm: "18px", md: "22px" },
+                    fontWeight: 600,
+                    cursor: "pointer",
+                  }}
                 >
                   Forgot Password?
                 </Typography>
+                <ForgorrenPasswordModelBox open={open} setOpen={setOpen} />;
               </Stack>
               <Box>
                 <Button

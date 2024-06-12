@@ -23,6 +23,7 @@ const authAPi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [TagTypes.AUTH],
     }),
+
     //reset Password
     resetPassword: build.mutation({
       query: (data) => ({
