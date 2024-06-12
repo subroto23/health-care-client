@@ -3,16 +3,29 @@ import Loader from "@/components/ui/Loader";
 import { useGetSinglePatientsQuery } from "@/redux/api/patientApi";
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import Link from "next/link";
 import TabData from "@/components/Tab/TabData";
+import { useGetMyAppointmentQuery } from "@/redux/api/appointmentApi";
+import { useRouter } from "next/navigation";
 
 const PatientTreatment = ({ params }) => {
+  const router = useRouter();
   const { data, isLoading } = useGetSinglePatientsQuery({
     id: params.patientId,
   });
-  if (isLoading) {
+  const { data: myAppointments, isLoading: appointmentsLoading } =
+    useGetMyAppointmentQuery({});
+  if (isLoading || appointmentsLoading) {
     return <Loader></Loader>;
   }
+  //Video Calling Id find
+  const videoCallingId = myAppointments?.filter(
+    (el) => el.id === params.appointmentId
+  )?.[0]?.videoCallingId;
+
+  const handleVideoCalling = () => {
+    router.push(`/live-video-call/${videoCallingId}`);
+  };
+
   return (
     <>
       <Grid
@@ -85,21 +98,18 @@ const PatientTreatment = ({ params }) => {
           }}
         >
           <Box>
-            <Box>
-              <Button
-                component={Link}
-                href={`/dashboard/doctor/video-call`}
-                sx={{
-                  backgroundColor: "#003846",
-                  marginY: 1,
-                  "&:hover": {
-                    backgroundColor: "primary.main",
-                  },
-                }}
-              >
-                <Typography color="#ffff">Video Call</Typography>
-              </Button>
-            </Box>
+            <Button
+              onClick={handleVideoCalling}
+              sx={{
+                backgroundColor: "#003846",
+                marginY: 1,
+                "&:hover": {
+                  backgroundColor: "primary.main",
+                },
+              }}
+            >
+              <Typography color="#ffff">Join Video Call</Typography>
+            </Button>
           </Box>
         </Grid>
       </Grid>

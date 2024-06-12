@@ -20,6 +20,7 @@ import GenerateRating from "@/utlis/rating";
 import { useState } from "react";
 import { useGetAllSpecilityQuery } from "@/redux/api/specilityApi";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const DoctorsPage = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -30,7 +31,10 @@ const DoctorsPage = () => {
   query["specialties"] = specialties;
   const { data, isLoading } = useGetAllDoctorsQuery({ ...query });
   const { data: specilitiy, isLoading: loading } = useGetAllSpecilityQuery({});
-
+  const router = useRouter();
+  const handleNavigateClick = (id: string) => {
+    router.push(`/doctors/${id}`);
+  };
   return (
     <>
       <Stack
@@ -115,6 +119,7 @@ const DoctorsPage = () => {
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
               },
             }}
+            onClick={() => handleNavigateClick(el?.id)}
           >
             <Grid item xs={12} sm={6}>
               <Stack

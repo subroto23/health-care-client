@@ -16,14 +16,9 @@ const Schedule = () => {
   if (isLoading) {
     return <Loader />;
   }
-  //Handle Payment
-  const handleControlPayment = (payment: string) => {
-    console.dir(payment, { extends: true });
-  };
-
   //Handle Video Calling
-  const handleVideoCallingId = (id: string) => {
-    console.log(id);
+  const handleVideoCallingId = (videoId: string) => {
+    router.push(`/live-video-call/${videoId}`);
   };
 
   // Transform the data to include doctor name

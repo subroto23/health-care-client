@@ -28,7 +28,7 @@ const CardButton = ({ id }: any) => {
           color={"#ffff"}
           fontSize={{ xs: 12, sm: 14, md: 16 }}
         >
-          Book Now
+          Booked Now
         </Typography>
       </Button>
       <Button
