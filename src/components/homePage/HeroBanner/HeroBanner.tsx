@@ -50,7 +50,7 @@ const HeroBanner = () => {
               mt={3}
               alignItems={{ xs: "center", md: "flex-start" }}
             >
-              <Button component={Link} href="/make-appointment">
+              <Button component={Link} href="/doctors">
                 <Typography
                   variant="h6"
                   component="p"

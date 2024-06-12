@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Card,
-  CardActions,
   CardContent,
   Grid,
   Stack,
@@ -11,6 +10,7 @@ import {
 } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Image from "next/image";
+import CardButton from "./CardButton";
 
 const OurTopRatedDoctor = async () => {
   const res = await fetch(
@@ -115,32 +115,8 @@ const OurTopRatedDoctor = async () => {
                       </Typography>
                     </Stack>
                   </CardContent>
-                  <CardActions
-                    sx={{
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Button variant="contained" size="small">
-                      <Typography
-                        textTransform={"capitalize"}
-                        fontWeight={600}
-                        color={"#ffff"}
-                        fontSize={{ xs: 12, sm: 14, md: 16 }}
-                      >
-                        Book Now
-                      </Typography>
-                    </Button>
-                    <Button variant="outlined" size="small">
-                      <Typography
-                        textTransform={"capitalize"}
-                        fontWeight={600}
-                        fontSize={{ xs: 12, sm: 14, md: 16 }}
-                        color="#04A7C3"
-                      >
-                        View Profile
-                      </Typography>
-                    </Button>
-                  </CardActions>
+                  {/* Card Button */}
+                  <CardButton id={el.id} />
                 </Card>
               </Grid>
             );

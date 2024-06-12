@@ -11,8 +11,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { profileDatas } from "./ProfilesData";
 import { logout } from "@/services/actions/logout";
-import { cookies } from "next/headers";
-import { authProtectedKey } from "../constants/globalConstants";
 
 const NavbarProfile = () => {
   const { data, isLoading } = useGetSingleUserQuery({});
@@ -39,7 +37,11 @@ const NavbarProfile = () => {
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Remy Sharp" src={data?.profilePhoto} />
+          <Avatar
+            alt="Remy Sharp"
+            src={data?.profilePhoto}
+            sx={{ border: "1px solid black" }}
+          />
         </IconButton>
       </Tooltip>
       <Menu
