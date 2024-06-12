@@ -90,19 +90,19 @@ const DoctorInfoCard = ({ data }: any) => {
           </Typography>
           <Box>
             <Button
-              component={Link}
-              href={`/`}
               sx={{
                 backgroundColor: "#34c300",
                 borderRadius: "150px",
                 marginY: 1,
                 "&:hover": {
-                  backgroundColor: "primary.main",
+                  // backgroundColor: "primary.main",
+                  backgroundColor: "#34c300",
                 },
               }}
             >
               <Typography color="#ffff">
-                <VideocamIcon /> See Doctor Now
+                {/* <VideocamIcon /> See Doctor Now */}
+                Verified Doctor
               </Typography>
             </Button>
           </Box>
