@@ -80,7 +80,7 @@ export default function TabData({ data, params }: any) {
       <Box sx={{ p: 2 }}>
         {value === 0 && <PatientProfileInformation data={data} />}
         {value === 1 && <MediaclReport data={data} />}
-        {value === 2 && <Prescription data={data} params={params} />}
+        {value === 2 && <Prescription params={params} />}
       </Box>
     </Box>
   );
