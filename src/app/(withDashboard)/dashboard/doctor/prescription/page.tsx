@@ -23,6 +23,8 @@ const Prescription = ({ data, params }: any) => {
       if (res?.id) {
         toast.success("Prescription Created Successfully");
         setInstructions("");
+      } else if (res?.success === false) {
+        toast.error(res?.message);
       }
     } catch (error) {
       toast.error("Failed to create !!!");

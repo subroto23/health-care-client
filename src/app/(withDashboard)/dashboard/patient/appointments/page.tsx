@@ -1,16 +1,17 @@
 "use client";
 import Loader from "@/components/ui/Loader";
 import { useGetMyAppointmentQuery } from "@/redux/api/appointmentApi";
-import convertTo12HourTime from "@/utlis/convertTime12Hour";
-import { dateFormater } from "@/utlis/dateFormeting";
 import { Box, Button, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useRouter } from "next/navigation";
-import VideocamIcon from "@mui/icons-material/Videocam";
 import { heading } from "../../doctor/profile/utlis/heading";
+import { useState } from "react";
+import ReviewModalBox from "./ReviewModalBox";
 
 const Appointments = () => {
   const { data, isLoading } = useGetMyAppointmentQuery({});
+  const [open, setOpen] = useState(false);
+  const [appointmentId, setAppointmentId] = useState("");
   const router = useRouter();
 
   if (isLoading) {
@@ -28,6 +29,7 @@ const Appointments = () => {
     docContactNumber: el?.doctor?.contactNumber,
     doctorQualification: el?.doctor?.qualification,
     doctorCurrentWorkingPlace: el?.doctor?.currentWorkingPlace,
+    status: el?.status,
     paymentStatus: el.paymentStatus === "UNPAID" ? "Pay" : "Paid",
   }));
 
@@ -61,6 +63,13 @@ const Appointments = () => {
       headerName: "Doctor Current Working",
     },
     {
+      field: "status",
+      headerAlign: "center",
+      align: "center",
+      flex: 1,
+      headerName: "Appointment Status",
+    },
+    {
       field: "paymentStatus",
       headerName: "Payment Status",
       headerAlign: "center",
@@ -81,6 +90,34 @@ const Appointments = () => {
             >
               {row?.paymentStatus}
             </Button>
+          </Box>
+        );
+      },
+    },
+    {
+      field: "Review",
+      headerName: "Review",
+      headerAlign: "center",
+      flex: 1,
+      align: "center",
+      renderCell: ({ row }) => {
+        return (
+          <Box>
+            <Button
+              variant="outlined"
+              sx={{}}
+              onClick={() => {
+                setOpen(true);
+                setAppointmentId(row?.id);
+              }}
+            >
+              Review
+            </Button>
+            <ReviewModalBox
+              open={open}
+              setOpen={setOpen}
+              appointmentId={appointmentId}
+            />
           </Box>
         );
       },

@@ -11,6 +11,7 @@ export enum TagTypes {
   APPOINTMENT = "appointment",
   METADTA = "metaData",
   PRESCRIPTION = "prescription",
+  REVIEW = "review",
 }
 
 export const tagTypesValues = [
@@ -26,4 +27,5 @@ export const tagTypesValues = [
   TagTypes.APPOINTMENT,
   TagTypes.METADTA,
   TagTypes.PRESCRIPTION,
+  TagTypes.REVIEW,
 ];
