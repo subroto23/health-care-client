@@ -32,9 +32,8 @@ const SchdeduleModel = ({ open, setOpen }: TModelProps) => {
       const res = await createDoctorSchedule({
         schedule: selectedValue,
       }).unwrap();
-      console.log(res);
-      if (res?.data > 0) {
-        toast.success(res?.message);
+      if (res?.count > 0) {
+        toast.success("Your Schedule Created Successfully");
         setOpen(false);
       }
     } catch (error) {

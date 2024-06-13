@@ -16,8 +16,8 @@ const VideoCallingConfig = ({ VId }: any) => {
     const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
       appID,
       serverSecret,
+      VId,
       Date.now().toString(),
-      "healthCareVideoCalling",
       VId
     );
 
@@ -27,9 +27,22 @@ const VideoCallingConfig = ({ VId }: any) => {
     // start the call
     zp.joinRoom({
       container: meetingContainerRef.current,
+      sharedLinks: [
+        {
+          name: "Personal link",
+          url:
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname +
+            "?roomID=" +
+            VId,
+        },
+      ],
       scenario: {
         mode: ZegoUIKitPrebuilt.OneONoneCall,
       },
+      videoResolutionDefault: ZegoUIKitPrebuilt.VideoResolution_480P,
     });
   };
   useEffect(() => {

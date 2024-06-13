@@ -11,10 +11,10 @@ import convertTo12HourTime from "@/utlis/convertTime12Hour";
 const Appointments = () => {
   const { data, isLoading } = useGetMyAppointmentQuery({});
   const router = useRouter();
-
   if (isLoading) {
     return <Loader />;
   }
+
   //Handle Payment
   const handleControlTreatment = (clickedValue: {
     patientId: string;
@@ -29,6 +29,7 @@ const Appointments = () => {
     patientId: el?.patient?.id,
     name: el?.patient?.name,
     scheduleDate: dateFormater(el?.schedule?.startDate),
+    status: el?.status,
     schedulTime: `${convertTo12HourTime(el?.schedule?.startDate)}`,
   }));
 
@@ -55,6 +56,29 @@ const Appointments = () => {
       headerName: "Schedule Time",
     },
     {
+      field: "status",
+      headerAlign: "center",
+      align: "center",
+      flex: 1,
+      headerName: "Appointment Status",
+      renderCell: (params) => (
+        <Box
+          sx={{
+            color:
+              params.value === "COMPLETED"
+                ? "green"
+                : params.value === "SCHEDULED"
+                ? "gray"
+                : "orange",
+            fontWeight: params.value === "COMPLETED" ? "bold" : "normal",
+            fontSize: params.value === "COMPLETED" ? "18px" : "normal",
+          }}
+        >
+          {params.value}
+        </Box>
+      ),
+    },
+    {
       field: "Icon",
       headerName: "Treatment",
       headerAlign: "center",
@@ -71,6 +95,7 @@ const Appointments = () => {
                   appontmentId: row?.id,
                 })
               }
+              disabled={row?.status === "COMPLETED"}
             >
               Treatment
             </Button>

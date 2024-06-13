@@ -10,7 +10,16 @@ const paymentApi = baseApi.injectEndpoints({
         contentType: "application/json",
       }),
     }),
+
+    //Payments Verify
+    verifyPayments: build.query({
+      query: (arg) => ({
+        url: `/payments/validation-payment`,
+        method: "GET",
+        params: arg,
+      }),
+    }),
   }),
 });
 
-export const { useInitialPaymentMutation } = paymentApi;
+export const { useInitialPaymentMutation, useVerifyPaymentsQuery } = paymentApi;

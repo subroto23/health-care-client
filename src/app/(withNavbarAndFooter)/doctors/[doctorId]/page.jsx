@@ -10,10 +10,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import {
-  useGetAllDoctorSchedulesForPatientQuery,
-  useGetAllDoctorSchedulesQuery,
-} from "@/redux/api/doctorScheduleApi";
+import { useGetAllDoctorSchedulesForPatientQuery } from "@/redux/api/doctorScheduleApi";
 import { dateFormater } from "@/utlis/dateFormeting";
 import convertTo12HourTime from "@/utlis/convertTime12Hour";
 import { heading } from "@/app/(withDashboard)/dashboard/doctor/profile/utlis/heading";
