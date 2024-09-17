@@ -61,7 +61,7 @@ const Navbar = () => {
               color={"primary"}
               fontWeight={600}
             >
-              <Link href="/">Healthcare</Link>
+              <Link href="/">HealthCare</Link>
             </Typography>
           </Stack>
 

@@ -1,4 +1,4 @@
-import { TagTypes } from "../tagTypes/tagTypes";
+import { TagTypes } from "./../tagTypes/tagTypes";
 import { baseApi } from "./baseApi";
 
 const prescriptionApi = baseApi.injectEndpoints({
@@ -10,7 +10,7 @@ const prescriptionApi = baseApi.injectEndpoints({
         data,
         contentType: "application/json",
       }),
-      invalidatesTags: [TagTypes.PRESCRIPTION],
+      invalidatesTags: [TagTypes.PRESCRIPTION, TagTypes.APPOINTMENT],
     }),
 
     //Get All

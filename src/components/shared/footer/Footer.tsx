@@ -39,7 +39,7 @@ const Footer = () => {
             textAlign: "center",
           }}
         >
-          &copy; {year}, Healthcare. All rights reserved.
+          &copy; {year}, HealthCare. All rights reserved.
         </Typography>
       </Stack>
     </>
